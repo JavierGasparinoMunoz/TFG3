@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "960058637609",
+    "firebase_url": "https://proyecto-escolar-login.firebaseio.com",
+    "project_id": "proyecto-escolar-login",
+    "storage_bucket": "proyecto-escolar-login.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960058637609:android:12afe45a0bf42377878b38",
+        "android_client_info": {
+          "package_name": "com.example.tfg3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960058637609-knf8e0phv7k2p51fp7l0aku1vb2bkgdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tfg3",
+            "certificate_hash": "062f0fec31f8dfeac925263c995bee6c0d369810"
+          }
+        },
+        {
+          "client_id": "960058637609-t36a59dcuc19h563ts2jgv114rob32d2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSSmyTNi-L9vDEHo2AnxIYTe3gn4b5ipQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960058637609-t36a59dcuc19h563ts2jgv114rob32d2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
