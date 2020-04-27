@@ -14,23 +14,28 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
+import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText nombreSign, passSign, nameSign, surnameSign;
+    private EditText emailSign, passSign, nameSign, surnameSign;
     private Button btnSign;
     private FirebaseAuth mAuth;
     private Spinner estadoSign, cicloSign;
     private ArrayList listaEstados, listaCiclos;
     private ArrayAdapter adaptadorEstados;
     private ArrayAdapter adaptadorCiclos;
+    FirebaseUser currentUser;
+    Usuarios usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +74,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
     private void instancias() {
         mAuth = FirebaseAuth.getInstance();
-        nombreSign = findViewById(R.id.edit_usuario_sig);
+        emailSign = findViewById(R.id.edit_email_sig);
         passSign = findViewById(R.id.edit_pass_sig);
         nameSign = findViewById(R.id.edit_name_sig);
         surnameSign = findViewById(R.id.edit_lastnames_sig);
@@ -83,7 +88,12 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        currentUser = mAuth.getCurrentUser();
+    }
+
+    private void comprobarUsuario(final String uid){
+            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
+            referenciaTipo.setValue(usuario);
     }
 
     @Override
@@ -91,19 +101,21 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_sign:
 
-                mAuth.createUserWithEmailAndPassword(nombreSign.getText().toString(), passSign.getText().toString())
+                mAuth.createUserWithEmailAndPassword(emailSign.getText().toString(), passSign.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful() && !nombreSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
+                                if (task.isSuccessful() && !emailSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("login", "createUserWithEmail:success");
                                     Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
-                                    nombreSign.setText("");
+                                    String uid = currentUser.getUid();
+                                    emailSign.setText("");
                                     passSign.setText("");
                                     nameSign.setText("");
                                     surnameSign.setText("");
-
+                                    usuario = new Usuarios(surnameSign.getText().toString(),cicloSign.getSelectedItem().toString(),emailSign.getText().toString(),nameSign.getText().toString(),estadoSign.getSelectedItem().toString());
+                                    comprobarUsuario(uid);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("login", "createUserWithEmail:failure", task.getException());

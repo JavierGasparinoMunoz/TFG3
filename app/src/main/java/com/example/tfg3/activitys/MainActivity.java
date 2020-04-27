@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     private void instancias() {
         mAuth = FirebaseAuth.getInstance();
         nombreLog = findViewById(R.id.edit_usuario_log);
-        nombreSign = findViewById(R.id.edit_usuario_sig);
+        nombreSign = findViewById(R.id.edit_email_sig);
         passLog = findViewById(R.id.edit_pass_log);
         passSign = findViewById(R.id.edit_pass_sig);
         btnLog = findViewById(R.id.button_log);

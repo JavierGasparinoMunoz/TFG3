@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         instancias();
+        admin();
         acciones();
     }
 
@@ -56,6 +57,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         registro = findViewById(R.id.button_registro);
     }
 
+    private void admin(){
+        if(nombreLog.getText().toString().equals("administrador@gmail.com") && passLog.getText().toString().equals("administrador")){
+            Intent intent = new Intent(getApplicationContext(),AdministradorActivity.class);
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -67,22 +75,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         referenciaTipo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //String tipo = (String) dataSnapshot.getValue();
-                Usuarios usuario = dataSnapshot.getValue(Usuarios.class);
-                Toast.makeText(getApplicationContext(),String.valueOf(usuario.getPerfil()),Toast.LENGTH_SHORT).show();
-                if (usuario.getPerfil().equals("alumno")){
-                    // TODO lo que sea de alumno y cargo su pantalla
-                    Intent intent = new Intent(getApplicationContext(),AlumnoActivity.class);
-                    intent.putExtra("user",nombreLog.getText().toString());
-                    intent.putExtra("uid",uid);
-                    startActivity(intent);
-                } else if (usuario.getPerfil().equals("padre")){
-                    // TODO lo que sea de padre y cargo su pantalla
-                    Intent intent = new Intent(getApplicationContext(),PadreActivity.class);
-                    intent.putExtra("user",nombreLog.getText().toString());
-                    intent.putExtra("uid",uid);
-                    startActivity(intent);
-
+                if(dataSnapshot.hasChild(uid)) {
+                    //String tipo = (String) dataSnapshot.getValue();
+                    Usuarios usuario = dataSnapshot.getValue(Usuarios.class);
+                    Toast.makeText(getApplicationContext(), String.valueOf(usuario.getPerfil()), Toast.LENGTH_SHORT).show();
+                    if (usuario.getPerfil().equals("alumno")) {
+                        // TODO lo que sea de alumno y cargo su pantalla
+                        Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
+                        intent.putExtra("user", nombreLog.getText().toString());
+                        intent.putExtra("uid", uid);
+                        startActivity(intent);
+                    } else if (usuario.getPerfil().equals("padre")) {
+                        // TODO lo que sea de padre y cargo su pantalla
+                        Intent intent = new Intent(getApplicationContext(), PadreActivity.class);
+                        intent.putExtra("user", nombreLog.getText().toString());
+                        intent.putExtra("uid", uid);
+                        startActivity(intent);
+                    } else {
+                        admin();
+                    }
                 }
             }
 

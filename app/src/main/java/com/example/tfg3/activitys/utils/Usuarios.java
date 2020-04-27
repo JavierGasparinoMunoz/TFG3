@@ -1,17 +1,17 @@
 package com.example.tfg3.activitys.utils;
 
 public class Usuarios {
-    String email,nombre,apellidos,perfil,ciclo;
+    private String email,nombre,apellido,perfil,ciclo;
 
     public Usuarios() {
     }
 
-    public Usuarios(String email, String nombre, String apellidos, String perfil, String ciclo) {
+    public Usuarios(String apellido,String ciclo,String email, String nombre, String perfil ) {
+        this.apellido = apellido;
+        this.ciclo = ciclo;
         this.email = email;
         this.nombre = nombre;
-        this.apellidos = apellidos;
         this.perfil = perfil;
-        this.ciclo = ciclo;
     }
 
     public String getEmail() {
@@ -31,11 +31,11 @@ public class Usuarios {
     }
 
     public String getApellidos() {
-        return apellidos;
+        return apellido;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setApellidos(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getPerfil() {
@@ -57,11 +57,11 @@ public class Usuarios {
     @Override
     public String toString() {
         return "Usuarios{" +
+                ", apellido='" + apellido + '\'' +
+                ", ciclo='" + ciclo + '\'' +
                 "email='" + email + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
                 ", perfil='" + perfil + '\'' +
-                ", ciclo='" + ciclo + '\'' +
                 '}';
     }
 }
