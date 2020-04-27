@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText emailSign, passSign, nameSign, surnameSign;
-    private Button btnSign;
+    private Button btnSign,btnLog;
     private FirebaseAuth mAuth;
     private Spinner estadoSign, cicloSign;
     private ArrayList listaEstados, listaCiclos;
@@ -70,6 +70,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
     private void acciones() {
         btnSign.setOnClickListener(this);
+        btnLog.setOnClickListener(this);
     }
 
     private void instancias() {
@@ -83,6 +84,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         listaCiclos = new ArrayList();
         listaEstados = new ArrayList();
         btnSign = findViewById(R.id.button_sign);
+        btnLog = findViewById(R.id.button_log_sign);
     }
 
     @Override
@@ -124,6 +126,9 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                 }
                             }
                         });
+                break;
+            case R.id.button_log_sign:
+                finish();
                 break;
         }
     }

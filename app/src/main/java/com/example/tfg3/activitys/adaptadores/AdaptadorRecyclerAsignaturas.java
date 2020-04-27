@@ -9,20 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg3.R;
+import com.example.tfg3.activitys.utils.Asignatura;
 import com.example.tfg3.activitys.utils.Usuarios;
 
 import java.util.ArrayList;
 
 public class AdaptadorRecyclerAsignaturas extends RecyclerView.Adapter {
-    ArrayList listaAsignaturas;
+    ArrayList<Asignatura> listaAsignaturas;
     Context context;
-    AdaptadorRecycler.OnUsuarioListener listener;
+    OnAsignaturaListener listener;
 
     public AdaptadorRecyclerAsignaturas(Context context,ArrayList listaAsignaturas) {
         this.context = context;
         this.listaAsignaturas = listaAsignaturas;
         try {
-            listener = (AdaptadorRecycler.OnUsuarioListener) context;
+            listener = (OnAsignaturaListener) context;
         } catch (ClassCastException e) {
 
         }
@@ -36,6 +37,7 @@ public class AdaptadorRecyclerAsignaturas extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        final Asignatura asignatura = listaAsignaturas.get(position);
     }
 
     public interface OnAsignaturaListener{
