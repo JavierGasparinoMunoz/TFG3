@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText nombreLog, passLog;
     private Button btnLog,registro;
     private FirebaseAuth mAuth;
+    Usuarios usuario;
     FirebaseUser currentUser;
 
     @Override
@@ -65,6 +66,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    private void comprobarUsuario(final String uid){
+        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
+        referenciaTipo.setValue(usuario);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -78,23 +84,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(uid)) {
                     //String tipo = (String) dataSnapshot.getValue();
-                    Usuarios usuario = dataSnapshot.getValue(Usuarios.class);
+                     usuario = dataSnapshot.getValue(Usuarios.class);
                     Toast.makeText(getApplicationContext(), String.valueOf(usuario.getPerfil()), Toast.LENGTH_SHORT).show();
-                    if (usuario.getPerfil().equals("alumno")) {
+                    if (usuario.getPerfil().equals("Alumno")) {
                         // TODO lo que sea de alumno y cargo su pantalla
                         Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                         intent.putExtra("user", nombreLog.getText().toString());
                         intent.putExtra("uid", uid);
                         startActivity(intent);
-                    } else if (usuario.getPerfil().equals("padre")) {
+                    } else if (usuario.getPerfil().equals("Padre")) {
                         // TODO lo que sea de padre y cargo su pantalla
                         Intent intent = new Intent(getApplicationContext(), PadreActivity.class);
                         intent.putExtra("user", nombreLog.getText().toString());
                         intent.putExtra("uid", uid);
                         startActivity(intent);
                     } else {
+                        // TODO si no es ninguno de los perfiles cargo la pantalla administrador
                         admin();
                     }
+                } else {
+                    comprobarUsuario(uid);
                 }
             }
 

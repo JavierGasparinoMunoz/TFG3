@@ -53,7 +53,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         listaEstados.add("Profesor");
 
         adaptadorEstados = new ArrayAdapter(getApplicationContext(),
-                android.R.layout.simple_spinner_item, listaEstados);
+                R.layout.layout_spinner_perfil, listaEstados);
         estadoSign.setAdapter(adaptadorEstados);
         adaptadorEstados.getItem(estadoSign.getSelectedItemPosition());
     }
@@ -62,8 +62,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         listaCiclos.add("dam");
         listaCiclos.add("bachillerato");
 
-        adaptadorCiclos = new ArrayAdapter(getApplicationContext(),
-                android.R.layout.simple_spinner_item, listaCiclos);
+        adaptadorCiclos = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.layout_spinner_ciclo, listaCiclos);
         cicloSign.setAdapter(adaptadorCiclos);
         adaptadorCiclos.getItem(cicloSign.getSelectedItemPosition());
     }
@@ -93,10 +93,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         currentUser = mAuth.getCurrentUser();
     }
 
-    private void comprobarUsuario(final String uid){
-            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
-            referenciaTipo.setValue(usuario);
-    }
+
 
     @Override
     public void onClick(View view) {
@@ -117,7 +114,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                     nameSign.setText("");
                                     surnameSign.setText("");
                                     usuario = new Usuarios(surnameSign.getText().toString(),cicloSign.getSelectedItem().toString(),emailSign.getText().toString(),nameSign.getText().toString(),estadoSign.getSelectedItem().toString());
-                                    comprobarUsuario(uid);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("login", "createUserWithEmail:failure", task.getException());
