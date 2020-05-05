@@ -76,8 +76,8 @@ public class AlumnoActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         toolbar = findViewById(R.id.toolbar);
         tabLayout = findViewById(R.id.tab_layout);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Alumno");
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle("Alumno");
         tabLayout.setupWithViewPager(viewPager);
     }
 }

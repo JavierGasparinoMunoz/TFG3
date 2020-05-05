@@ -66,11 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void comprobarUsuario(final String uid){
-        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
-        referenciaTipo.setValue(usuario);
-    }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -84,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild(uid)) {
                     //String tipo = (String) dataSnapshot.getValue();
+
                      usuario = dataSnapshot.getValue(Usuarios.class);
                     Toast.makeText(getApplicationContext(), String.valueOf(usuario.getPerfil()), Toast.LENGTH_SHORT).show();
                     if (usuario.getPerfil().equals("Alumno")) {
@@ -102,8 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // TODO si no es ninguno de los perfiles cargo la pantalla administrador
                         admin();
                     }
-                } else {
-                    comprobarUsuario(uid);
                 }
             }
 
@@ -118,6 +112,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_log:
+
+                Intent intent = new Intent(getApplicationContext(),AlumnoActivity.class);
+                startActivity(intent);
 
                 mAuth.signInWithEmailAndPassword(nombreLog.getText().toString(), passLog.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

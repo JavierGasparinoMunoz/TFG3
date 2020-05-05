@@ -93,7 +93,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         currentUser = mAuth.getCurrentUser();
     }
 
-
+    private void comprobarUsuario(final String uid){
+        usuario = new Usuarios(uid,emailSign.getText().toString(),nameSign.getText().toString(),surnameSign.getText().toString(),estadoSign.getSelectedItem().toString(),cicloSign.getSelectedItem().toString());
+        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(usuario.getUid());
+        referenciaTipo.setValue(usuario);
+        //usuario = new Usuarios(uid,)
+        //referenciaTipo.child("usuarios").child(usuario.getUid());
+    }
 
     @Override
     public void onClick(View view) {
@@ -113,7 +119,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                     passSign.setText("");
                                     nameSign.setText("");
                                     surnameSign.setText("");
-                                    usuario = new Usuarios(surnameSign.getText().toString(),cicloSign.getSelectedItem().toString(),emailSign.getText().toString(),nameSign.getText().toString(),estadoSign.getSelectedItem().toString());
+                                    comprobarUsuario(uid);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("login", "createUserWithEmail:failure", task.getException());
