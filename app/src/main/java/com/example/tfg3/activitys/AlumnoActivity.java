@@ -3,6 +3,7 @@ package com.example.tfg3.activitys;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.drawable.Drawable;
@@ -20,11 +21,11 @@ import java.util.ArrayList;
 
 public class AlumnoActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private AdaptadorFragmentsAlumno adaptadorFragments;
     private ArrayList<Fragment> listaFragments;
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
     private void iniciarPager() {
         listaFragments = new ArrayList();
+        recyclerView = findViewById(R.id.recycler_ciclos);
         listaFragments.add(new Ev1Fragment());
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
@@ -74,10 +76,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
     private void instancias() {
         viewPager = findViewById(R.id.view_pager);
-        toolbar = findViewById(R.id.toolbar);
         tabLayout = findViewById(R.id.tab_layout);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Alumno");
         tabLayout.setupWithViewPager(viewPager);
     }
 }

@@ -14,7 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tfg3.R;
+import com.example.tfg3.activitys.MainActivity;
+import com.example.tfg3.activitys.adaptadores.AdaptadorFirebase;
 import com.example.tfg3.activitys.adaptadores.AdaptadorRecycler;
+import com.example.tfg3.activitys.utils.CicloHolder;
+import com.example.tfg3.activitys.utils.Ciclos;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -22,8 +28,8 @@ import java.util.ArrayList;
 public class Ev1Fragment extends Fragment {
 
     private RecyclerView recyclerView;
+    AdaptadorFirebase adaptadorFirebase;
     private ArrayList listaNotas;
-    private AdaptadorRecycler adaptadorRecycler;
 
     public Ev1Fragment() {
     }
@@ -42,7 +48,12 @@ public class Ev1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ev1,container,false);
-        recyclerView = view.findViewById(R.id.recycler_notas_ev1);
+        recyclerView = view.findViewById(R.id.recycler_ciclos);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference referencia = database.getReference("ciclos");
+         adaptadorFirebase = new AdaptadorFirebase(Ciclos.class,R.layout.item_ciclo_layout
+                , CicloHolder.class,referencia, getContext());
+
         listaNotas = new ArrayList();
         return view;
     }
@@ -50,8 +61,8 @@ public class Ev1Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView.setAdapter(adaptadorRecycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2,
+        recyclerView.setAdapter(adaptadorFirebase);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1,
                 RecyclerView.VERTICAL, false));
     }
 }

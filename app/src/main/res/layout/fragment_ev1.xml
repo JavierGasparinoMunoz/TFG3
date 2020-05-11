@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activitys.fragments.Ev1Fragment"
-    android:id="@+id/principal"
-    android:background="@android:color/holo_green_light">
+    android:background="@android:color/holo_green_light"
+    android:orientation="horizontal"
+    tools:context=".activitys.fragments.Ev1Fragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/recycler_notas_ev1"
-        />
+        android:id="@+id/recycler_ciclos"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_notas"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5" />
 
 </FrameLayout>

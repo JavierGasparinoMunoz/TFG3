@@ -70,12 +70,12 @@ public class Usuarios {
     @Override
     public String toString() {
         return "Usuarios{" +
-                "uid='" + uid + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", ciclo='" + ciclo + '\'' +
                 ", email='" + email + '\'' +
                 ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
                 ", perfil='" + perfil + '\'' +
-                ", ciclo='" + ciclo + '\'' +
+                "uid='" + uid + '\'' +
                 '}';
     }
 }

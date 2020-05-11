@@ -31,7 +31,7 @@ public class AdaptadorRecyclerAsignaturas extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(context).inflate(R.layout.item_asignatura_layout,parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.item_ciclo_layout,parent,false);
         return new MiHolder(v);
     }
 

@@ -1,6 +1,7 @@
 package com.example.tfg3.activitys;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -101,6 +102,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         //referenciaTipo.child("usuarios").child(usuario.getUid());
     }
 
+    private void vaciarTexto(){
+        emailSign.setText("");
+        passSign.setText("");
+        nameSign.setText("");
+        surnameSign.setText("");
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -113,13 +121,17 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                 if (task.isSuccessful() && !emailSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d("login", "createUserWithEmail:success");
-                                    Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
+                                    //Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
                                     String uid = currentUser.getUid();
-                                    emailSign.setText("");
-                                    passSign.setText("");
-                                    nameSign.setText("");
-                                    surnameSign.setText("");
                                     comprobarUsuario(uid);
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                    builder.setTitle("Dialogo de registro");
+                                    builder.setMessage("Registro creado correctamente");
+
+                                    vaciarTexto();
+
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("login", "createUserWithEmail:failure", task.getException());

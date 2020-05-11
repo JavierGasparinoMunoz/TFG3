@@ -7,24 +7,23 @@
     tools:context=".activitys.AlumnoActivity">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:id="@+id/toolbar"
-        />
+        android:background="@color/colorPrimary" />
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/tab_layout" />
+        android:background="@color/colorPrimary" />
 
 
     <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/view_pager"/>
-
+        android:layout_height="match_parent">
+    </androidx.viewpager.widget.ViewPager>
 
 
 </LinearLayout>
