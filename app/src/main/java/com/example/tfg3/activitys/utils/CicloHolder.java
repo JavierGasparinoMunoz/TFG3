@@ -11,8 +11,14 @@ public class CicloHolder extends RecyclerView.ViewHolder {
 
     TextView nombre;
 
+    public TextView getNombre() {
+        return nombre;
+    }
+
     public CicloHolder(View itemView) {
         super(itemView);
         nombre = itemView.findViewById(R.id.nombreHolder);
+
+
     }
 }

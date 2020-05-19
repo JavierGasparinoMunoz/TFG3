@@ -94,8 +94,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         intent.putExtra("user", nombreLog.getText().toString());
                         intent.putExtra("uid", uid);
                         startActivity(intent);
+                    } else if (usuario.getPerfil().equals("Profesor")) {
+                        // TODO lo que sea de profesor y cargo su pantalla
+                        Intent intent = new Intent(getApplicationContext(), UsuariosActivity.class);
+                        intent.putExtra("user", nombreLog.getText().toString());
+                        intent.putExtra("uid", uid);
+                        startActivity(intent);
                     } else {
-                        // TODO si no es ninguno de los perfiles cargo la pantalla administrador
+                        // TODO Si no es ninguno de los perfiles cargo la pantalla administrador
                         admin();
                     }
                 }
@@ -113,9 +119,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.button_log:
 
-                Intent intent = new Intent(getApplicationContext(),AlumnoActivity.class);
-                startActivity(intent);
-
                 mAuth.signInWithEmailAndPassword(nombreLog.getText().toString(), passLog.getText().toString())
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -131,6 +134,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     //startActivity(i);
 
                                     comprobarTipo(uid);
+
+                                    Intent intent = new Intent(getApplicationContext(),AlumnoActivity.class);
+                                    startActivity(intent);
 
                                     Toast.makeText(getApplicationContext(),"Logueo satisfactorio",Toast.LENGTH_SHORT);
                                 } else {

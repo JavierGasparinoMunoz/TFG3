@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorFragmentsAlumno;
+import com.example.tfg3.activitys.fragments.CalendarioAlumnoFragment;
 import com.example.tfg3.activitys.fragments.Ev1Fragment;
 import com.example.tfg3.activitys.fragments.Ev2Fragment;
 import com.example.tfg3.activitys.fragments.Ev3Fragment;
@@ -68,6 +69,7 @@ public class AlumnoActivity extends AppCompatActivity {
         listaFragments.add(new Ev1Fragment());
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
+        listaFragments.add(new CalendarioAlumnoFragment());
         adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
         Ev1Fragment listaFragment = new Ev1Fragment();
         //adaptadorFragments.agregarFragment(listaFragment);

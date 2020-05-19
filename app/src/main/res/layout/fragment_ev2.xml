@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activitys.fragments.Ev2Fragment"
-    android:id="@+id/principal"
-    android:background="@android:color/holo_blue_bright">
+    android:id="@+id/principal">
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"

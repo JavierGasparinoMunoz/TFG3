@@ -23,6 +23,6 @@ public class AdaptadorFirebase extends FirebaseRecyclerAdapter<Ciclos, CicloHold
 
     @Override
     protected void populateViewHolder(CicloHolder viewHolder, final Ciclos model, int position) {
-        //viewHolder.nombre.setText(model.getNombre());
+        viewHolder.getNombre().setText(model.getNombre());
     }
 }
