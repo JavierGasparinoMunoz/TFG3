@@ -17,6 +17,7 @@
         android:orientation="vertical">
 
         <EditText
+            android:hint="Escriba aqui la infromacion relevante"
             android:id="@+id/edit_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

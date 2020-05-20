@@ -16,6 +16,7 @@ import com.example.tfg3.activitys.fragments.CalendarioAlumnoFragment;
 import com.example.tfg3.activitys.fragments.Ev1Fragment;
 import com.example.tfg3.activitys.fragments.Ev2Fragment;
 import com.example.tfg3.activitys.fragments.Ev3Fragment;
+import com.example.tfg3.activitys.fragments.FormularioAlumnosFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -70,6 +71,7 @@ public class AlumnoActivity extends AppCompatActivity {
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
         listaFragments.add(new CalendarioAlumnoFragment());
+        listaFragments.add(new FormularioAlumnosFragment());
         adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
         Ev1Fragment listaFragment = new Ev1Fragment();
         //adaptadorFragments.agregarFragment(listaFragment);

@@ -1,18 +1,12 @@
 package com.example.tfg3.activitys.adaptadores;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.tfg3.activitys.AlumnoActivity;
-import com.example.tfg3.activitys.ProfesorActivity;
-import com.example.tfg3.activitys.utils.CicloHolder;
-import com.example.tfg3.activitys.utils.UsuarioHolder;
+import com.example.tfg3.activitys.holders.UsuarioHolder;
 import com.example.tfg3.activitys.utils.Usuarios;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
-import com.squareup.picasso.Picasso;
 
 public class AdaptadorUsuarios extends FirebaseRecyclerAdapter<Usuarios, UsuarioHolder> {
 

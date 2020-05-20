@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnLog,registro;
     private FirebaseAuth mAuth;
     Usuarios usuario;
-    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,12 +71,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    public void comprobarTipo(final String uid){
+    public void comprobarTipo(String uid){
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        uid = currentUser.getUid();
         DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
+        final String finalUid = uid;
         referenciaTipo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(uid)) {
+                if(dataSnapshot.hasChild(finalUid)) {
                     //String tipo = (String) dataSnapshot.getValue();
 
                      usuario = dataSnapshot.getValue(Usuarios.class);
@@ -86,24 +88,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // TODO lo que sea de alumno y cargo su pantalla
                         Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
                         intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", uid);
+                        intent.putExtra("uid", finalUid);
                         startActivity(intent);
                     } else if (usuario.getPerfil().equals("Padre")) {
                         // TODO lo que sea de padre y cargo su pantalla
                         Intent intent = new Intent(getApplicationContext(), PadreActivity.class);
                         intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", uid);
+                        intent.putExtra("uid", finalUid);
                         startActivity(intent);
                     } else if (usuario.getPerfil().equals("Profesor")) {
                         // TODO lo que sea de profesor y cargo su pantalla
                         Intent intent = new Intent(getApplicationContext(), UsuariosActivity.class);
                         intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", uid);
+                        intent.putExtra("uid", finalUid);
                         startActivity(intent);
                     } else {
                         // TODO Si no es ninguno de los perfiles cargo la pantalla administrador
                         admin();
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(),"Esto no va",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -125,20 +129,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful() && !nombreLog.getText().toString().isEmpty() && !passLog.getText().toString().isEmpty()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Log.d("login", "signInWithEmail:success");
                                     //Intent i = new Intent(LoginActivity.this,PrincipalActivity.class);
                                     FirebaseUser currentUser = mAuth.getCurrentUser();
                                     String uid = currentUser.getUid();
                                     //i.putExtra("user",nombreLog.getText().toString());
                                     //i.putExtra("uid",uid);
                                     //startActivity(i);
+                                    Log.d("login", "signInWithEmail:success");
+                                    Toast.makeText(getApplicationContext(),"Logueo satisfactorio",Toast.LENGTH_SHORT).show();
 
                                     comprobarTipo(uid);
 
-                                    Intent intent = new Intent(getApplicationContext(),AlumnoActivity.class);
-                                    startActivity(intent);
 
-                                    Toast.makeText(getApplicationContext(),"Logueo satisfactorio",Toast.LENGTH_SHORT);
+
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("login", "signInWithEmail:failure", task.getException());

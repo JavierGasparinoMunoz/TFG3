@@ -1,4 +1,4 @@
-package com.example.tfg3.activitys.utils;
+package com.example.tfg3.activitys.holders;
 
 import android.view.View;
 import android.widget.ImageView;

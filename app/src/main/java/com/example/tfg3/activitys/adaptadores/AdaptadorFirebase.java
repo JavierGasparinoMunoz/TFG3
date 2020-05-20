@@ -2,14 +2,11 @@ package com.example.tfg3.activitys.adaptadores;
 
 
 import android.content.Context;
-import android.view.View;
-import android.widget.Toast;
 
-import com.example.tfg3.activitys.utils.CicloHolder;
+import com.example.tfg3.activitys.holders.CicloHolder;
 import com.example.tfg3.activitys.utils.Ciclos;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
-import com.squareup.picasso.Picasso;
 
 public class AdaptadorFirebase extends FirebaseRecyclerAdapter<Ciclos, CicloHolder> {
 

@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorUsuarios;
-import com.example.tfg3.activitys.utils.UsuarioHolder;
+import com.example.tfg3.activitys.holders.UsuarioHolder;
 import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
