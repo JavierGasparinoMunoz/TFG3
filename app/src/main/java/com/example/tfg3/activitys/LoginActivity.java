@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -71,17 +72,48 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
-    public void comprobarTipo(String uid){
+    public void comprobarTipo(String uid) {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         uid = currentUser.getUid();
-        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
+        DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
         final String finalUid = uid;
         referenciaTipo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChild(finalUid)) {
-                    //String tipo = (String) dataSnapshot.getValue();
+                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                while (iterator.hasNext()) {
+                    DataSnapshot dataSnapshot1 = iterator.next();
+                    if (dataSnapshot1.getKey().equals("perfil")) {
+                        String tipo = (String) dataSnapshot1.getValue();
+                        switch (tipo) {
+                            case "Alumno":
+                                Log.v("ejemplo", "el usuario es alumno");
+                                Intent intentAl = new Intent(getApplicationContext(), AlumnoActivity.class);
+                                intentAl.putExtra("user", nombreLog.getText().toString());
+                                intentAl.putExtra("uid", finalUid);
+                                startActivity(intentAl);
+                                break;
+                            case "Padre":
+                                Intent intentPad = new Intent(getApplicationContext(), PadreActivity.class);
+                                intentPad.putExtra("user", nombreLog.getText().toString());
+                                intentPad.putExtra("uid", finalUid);
+                                startActivity(intentPad);
+                                break;
+                            case "Profesor":
+                                Intent intentProf = new Intent(getApplicationContext(), UsuariosActivity.class);
+                                intentProf.putExtra("user", nombreLog.getText().toString());
+                                intentProf.putExtra("uid", finalUid);
+                                startActivity(intentProf);
+                                break;
+                            default:
+                                admin();
+                                break;
+                        }
+                    }
 
+
+                /*if(dataSnapshot.hasChild(finalUid)) {
+                    //String tipo = (String) dataSnapshot.getValue();
                      usuario = dataSnapshot.getValue(Usuarios.class);
                     Toast.makeText(getApplicationContext(), String.valueOf(usuario.getPerfil()), Toast.LENGTH_SHORT).show();
                     if (usuario.getPerfil().equals("Alumno")) {
@@ -108,7 +140,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 } else {
                     Toast.makeText(getApplicationContext(),"Esto no va",Toast.LENGTH_SHORT).show();
+                }*/
                 }
+
+
             }
 
             @Override

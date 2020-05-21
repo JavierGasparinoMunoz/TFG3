@@ -187,7 +187,7 @@ public class FormularioAlumnosFragment extends Fragment {
         }
     }*/
 
-    @Override
+   /* @Override
     public void onResume() {
         super.onResume();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -211,7 +211,7 @@ public class FormularioAlumnosFragment extends Fragment {
         }else{
            returnLogin();
         }
-    }
+    }*/
 
     private void returnLogin(){
         Intent intent = new Intent(getContext(), LoginActivity.class);

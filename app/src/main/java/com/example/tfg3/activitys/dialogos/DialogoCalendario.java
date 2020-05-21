@@ -23,7 +23,7 @@ public class DialogoCalendario extends DialogFragment {
     EditText editText;
     Button botonInfo;
     View vista;
-    Context context;
+    Context c;
     Informacion informacion;
     OnDialogoPersoListener listener;
 
@@ -31,8 +31,8 @@ public class DialogoCalendario extends DialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            this.context = context;
-            listener = (OnDialogoPersoListener) context;
+            this.c = context;
+            listener = (OnDialogoPersoListener) c;
         } catch (ClassCastException e){
             Log.v("cast","No se puede castear");
         }

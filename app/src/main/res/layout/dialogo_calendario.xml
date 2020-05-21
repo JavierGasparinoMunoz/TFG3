@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Introduce cualquier informacion relevante para este dia"
+        android:text="Introduce informacion para este dia"
         android:layout_margin="20dp"/>
 
     <LinearLayout
@@ -17,11 +17,12 @@
         android:orientation="vertical">
 
         <EditText
-            android:hint="Escriba aqui la infromacion relevante"
+            android:hint="Escriba aqui la informacion relevante"
             android:id="@+id/edit_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+            android:gravity="top|center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp" />
 
     </LinearLayout>
 

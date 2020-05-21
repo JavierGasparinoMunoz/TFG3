@@ -10,6 +10,11 @@ public class Usuarios {
         this.uid = uid;
     }
 
+    /*public Usuarios(String ciclo) {
+        this.ciclo = ciclo;
+    }*/
+
+
     public Usuarios(String uid,String email, String nombre, String apellido, String perfil, String ciclo) {
         this.uid = uid;
         this.email = email;
