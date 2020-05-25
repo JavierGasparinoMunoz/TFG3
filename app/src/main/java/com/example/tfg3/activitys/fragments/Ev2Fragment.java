@@ -57,7 +57,6 @@ public class Ev2Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ev2, container, false);
         recyclerViewAsignaturas = view.findViewById(R.id.recycler_ciclosev2);
-        recyclerViewNotas = view.findViewById(R.id.recycler_notas_ev2);
         listaAsignaturas = new ArrayList();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();

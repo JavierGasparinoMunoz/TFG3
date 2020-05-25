@@ -87,14 +87,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String tipo = (String) dataSnapshot1.getValue();
                         switch (tipo) {
                             case "Alumno":
-                                Log.v("ejemplo", "el usuario es alumno");
                                 Intent intentAl = new Intent(getApplicationContext(), AlumnoActivity.class);
                                 intentAl.putExtra("user", nombreLog.getText().toString());
                                 intentAl.putExtra("uid", finalUid);
                                 startActivity(intentAl);
                                 break;
                             case "Padre":
-                                Intent intentPad = new Intent(getApplicationContext(), PadreActivity.class);
+                                Intent intentPad = new Intent(getApplicationContext(), AlumnoActivity.class);
                                 intentPad.putExtra("user", nombreLog.getText().toString());
                                 intentPad.putExtra("uid", finalUid);
                                 startActivity(intentPad);
@@ -110,40 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 break;
                         }
                     }
-
-
-                /*if(dataSnapshot.hasChild(finalUid)) {
-                    //String tipo = (String) dataSnapshot.getValue();
-                     usuario = dataSnapshot.getValue(Usuarios.class);
-                    Toast.makeText(getApplicationContext(), String.valueOf(usuario.getPerfil()), Toast.LENGTH_SHORT).show();
-                    if (usuario.getPerfil().equals("Alumno")) {
-                        // TODO lo que sea de alumno y cargo su pantalla
-                        Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
-                        intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", finalUid);
-                        startActivity(intent);
-                    } else if (usuario.getPerfil().equals("Padre")) {
-                        // TODO lo que sea de padre y cargo su pantalla
-                        Intent intent = new Intent(getApplicationContext(), PadreActivity.class);
-                        intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", finalUid);
-                        startActivity(intent);
-                    } else if (usuario.getPerfil().equals("Profesor")) {
-                        // TODO lo que sea de profesor y cargo su pantalla
-                        Intent intent = new Intent(getApplicationContext(), UsuariosActivity.class);
-                        intent.putExtra("user", nombreLog.getText().toString());
-                        intent.putExtra("uid", finalUid);
-                        startActivity(intent);
-                    } else {
-                        // TODO Si no es ninguno de los perfiles cargo la pantalla administrador
-                        admin();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(),"Esto no va",Toast.LENGTH_SHORT).show();
-                }*/
                 }
-
-
             }
 
             @Override

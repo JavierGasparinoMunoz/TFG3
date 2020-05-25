@@ -62,8 +62,8 @@ public class Ev1Fragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_ciclos);
         listaAsignaturas = new ArrayList();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference referencia = database.getReference().child("ciclos");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference referencia = database.getReference().child("ciclos");
 
         referencia.addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,8 +72,7 @@ public class Ev1Fragment extends Fragment {
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot dataSnapshot1 = iterator.next();
-                    if (dataSnapshot1.getKey().equals("ciclo")) {
-                        String tipo = (String) dataSnapshot1.getValue();
+                    String tipo = dataSnapshot1.getKey();
                         switch (tipo) {
                             case "bachillerato":
                                 Log.v("ejemplo", "bachillerato");
@@ -91,6 +90,9 @@ public class Ev1Fragment extends Fragment {
                                 bachillerato = new Bachillerato(asignat1, asignat2, asignat3, asignat4, asignat5, asignat6, asignat7, asignat8, asignat9);
 
                                 listaAsignaturas.add(bachillerato);
+
+                                referencia.child("bachillerato");
+
                                 break;
                             case "dam":
                                 Log.v("ejemplo", "dam");
@@ -106,11 +108,11 @@ public class Ev1Fragment extends Fragment {
                                 dam = new Dam(asig1, asig2, asig3, asig4, asig5, asig6, asig7);
 
                                 listaAsignaturas.add(dam);
+
+                                referencia.child("dam");
+
                                 break;
                         }
-                    } else {
-                        Toast.makeText(getContext(),"no entra",Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
 

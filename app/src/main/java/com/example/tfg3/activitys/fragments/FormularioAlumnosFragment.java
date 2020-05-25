@@ -53,11 +53,10 @@ public class FormularioAlumnosFragment extends Fragment {
     private Button btnEnviar,cerrarSesion;
     private EditText editMensaje;
     private RecyclerView recyclerMensaje;
-    private ImageButton btnEnviarFoto;
     private AdaptadorMensajes adaptadorMensajes;
     private LinearLayoutManager linearLayoutManager;
     private FirebaseDatabase database;
-    FirebaseAuth mAuth;String currentUser;
+    String currentUser;
     private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;

@@ -27,7 +27,6 @@ public class AlumnoActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private AdaptadorFragmentsAlumno adaptadorFragments;
     private ArrayList<Fragment> listaFragments;
-    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +65,11 @@ public class AlumnoActivity extends AppCompatActivity {
 
     private void iniciarPager() {
         listaFragments = new ArrayList();
-        recyclerView = findViewById(R.id.recycler_ciclos);
         listaFragments.add(new Ev1Fragment());
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
         listaFragments.add(new CalendarioAlumnoFragment());
-        listaFragments.add(FormularioAlumnosFragment.newInstance(getIntent().getStringExtra("user")));
+        listaFragments.add(FormularioAlumnosFragment.newInstance((String) getIntent().getExtras().get("uid")));
         adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
         Ev1Fragment listaFragment = new Ev1Fragment();
         //adaptadorFragments.agregarFragment(listaFragment);

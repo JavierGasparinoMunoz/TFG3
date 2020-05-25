@@ -64,7 +64,7 @@ public class DialogoCalendario extends DialogFragment {
             @Override
             public void onClick(View view) {
                  informacion = new Informacion(editText.getText().toString());
-                 String infoString = informacion + editText.getText().toString();
+                 String infoString = informacion + " " + editText.getText().toString();
                 listener.onDilagoloSelected(infoString);
                 dismiss();
             }

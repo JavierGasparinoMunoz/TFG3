@@ -1,6 +1,8 @@
 package com.example.tfg3.activitys.utils;
 
-public class Informacion {
+import java.io.Serializable;
+
+public class Informacion implements Serializable {
 
     String info;
 

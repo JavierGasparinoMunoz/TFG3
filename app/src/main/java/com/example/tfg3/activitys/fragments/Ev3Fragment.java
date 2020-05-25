@@ -57,7 +57,6 @@ public class Ev3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ev3, container, false);
         recyclerViewAsignaturas = view.findViewById(R.id.recycler_ciclose_ev3);
-        recyclerViewNotas = view.findViewById(R.id.recycler_notas_ev3);
         listaAsignaturas = new ArrayList();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
