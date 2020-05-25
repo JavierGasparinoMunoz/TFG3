@@ -56,9 +56,8 @@ public class FormularioAlumnosFragment extends Fragment {
     private ImageButton btnEnviarFoto;
     private AdaptadorMensajes adaptadorMensajes;
     private LinearLayoutManager linearLayoutManager;
-
     private FirebaseDatabase database;
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth;String currentUser;
     private DatabaseReference databaseReference;
     private FirebaseStorage storage;
     private StorageReference storageReference;
@@ -67,6 +66,22 @@ public class FormularioAlumnosFragment extends Fragment {
     private String nombreUsuarioLog;
 
     public FormularioAlumnosFragment() {
+    }
+
+    public static FormularioAlumnosFragment newInstance(String user) {
+
+        Bundle args = new Bundle();
+        args.putString("user",user);
+
+        FormularioAlumnosFragment fragment = new FormularioAlumnosFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        currentUser =  this.getArguments().getString("user");
     }
 
     @Override
@@ -192,11 +207,11 @@ public class FormularioAlumnosFragment extends Fragment {
         }
     }*/
 
-    /*@Override
+    @Override
     public void onResume() {
-        if(getActivity().getIntent().getStringExtra("user") != null){
+        if(currentUser != null){
             btnEnviar.setEnabled(false);
-            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(getActivity().getIntent().getStringExtra("uid"));
+            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(currentUser);
             referenciaTipo.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -215,7 +230,7 @@ public class FormularioAlumnosFragment extends Fragment {
            returnLogin();
         }
         super.onResume();
-    }*/
+    }
 
     private void returnLogin(){
         Intent intent = new Intent(getContext(), LoginActivity.class);

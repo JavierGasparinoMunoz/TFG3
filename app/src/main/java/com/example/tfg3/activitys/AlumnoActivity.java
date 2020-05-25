@@ -71,7 +71,7 @@ public class AlumnoActivity extends AppCompatActivity {
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
         listaFragments.add(new CalendarioAlumnoFragment());
-        listaFragments.add(new FormularioAlumnosFragment());
+        listaFragments.add(FormularioAlumnosFragment.newInstance(getIntent().getStringExtra("user")));
         adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
         Ev1Fragment listaFragment = new Ev1Fragment();
         //adaptadorFragments.agregarFragment(listaFragment);
