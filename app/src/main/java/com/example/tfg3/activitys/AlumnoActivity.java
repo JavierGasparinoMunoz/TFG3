@@ -32,6 +32,9 @@ public class AlumnoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumno);
+        String recuperado = getIntent().getExtras().getString("uid");
+        Log.v("test",recuperado);
+        Log.v("test","ejecutado algo");
         instancias();
         iniciarPager();
         acciones();
