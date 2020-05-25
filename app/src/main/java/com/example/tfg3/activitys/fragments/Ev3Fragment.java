@@ -55,7 +55,7 @@ public class Ev3Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ev2, container, false);
+        View view = inflater.inflate(R.layout.fragment_ev3, container, false);
         recyclerViewAsignaturas = view.findViewById(R.id.recycler_ciclose_ev3);
         recyclerViewNotas = view.findViewById(R.id.recycler_notas_ev3);
         listaAsignaturas = new ArrayList();

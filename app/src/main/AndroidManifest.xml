@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeConBarra">
         <activity android:name=".activitys.UsuariosActivity"></activity>
-        <activity android:name=".activitys.ProfesorActivity" />
         <activity android:name=".activitys.AdministradorActivity" />
         <activity android:name=".activitys.RegistroActivity" />
         <activity android:name=".activitys.LoginActivity">

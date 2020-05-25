@@ -54,7 +54,6 @@ public class FormularioAlumnosFragment extends Fragment {
     private EditText editMensaje;
     private RecyclerView recyclerMensaje;
     private ImageButton btnEnviarFoto;
-
     private AdaptadorMensajes adaptadorMensajes;
     private LinearLayoutManager linearLayoutManager;
 
@@ -134,6 +133,12 @@ public class FormularioAlumnosFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 returnLogin();
             }
+        });cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                returnLogin();
+            }
         });
 
         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -187,13 +192,11 @@ public class FormularioAlumnosFragment extends Fragment {
         }
     }*/
 
-   /* @Override
+    /*@Override
     public void onResume() {
-        super.onResume();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if(getActivity().getIntent().getStringExtra("user") != null){
             btnEnviar.setEnabled(false);
-            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(currentUser.getUid());
+            DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(getActivity().getIntent().getStringExtra("uid"));
             referenciaTipo.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -211,6 +214,7 @@ public class FormularioAlumnosFragment extends Fragment {
         }else{
            returnLogin();
         }
+        super.onResume();
     }*/
 
     private void returnLogin(){

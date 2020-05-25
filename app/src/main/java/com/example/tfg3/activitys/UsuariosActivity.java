@@ -38,7 +38,7 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
 
     @Override
     public void onUsuarioSelected(Usuarios usuario) {
-        Intent intent = new Intent(getApplicationContext(), ProfesorActivity.class);
+        Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
         startActivity(intent);
     }
 }

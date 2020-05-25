@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText emailSign, passSign, nameSign, surnameSign;
+    private EditText emailSign, passSign, nameSign, surnameSign,confirmPassSign;
     private Button btnSign,btnLog;
     private FirebaseAuth mAuth;
     private Spinner estadoSign, cicloSign;
@@ -80,6 +80,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         passSign = findViewById(R.id.edit_pass_sig);
         nameSign = findViewById(R.id.edit_name_sig);
         surnameSign = findViewById(R.id.edit_lastnames_sig);
+        confirmPassSign = findViewById(R.id.edit_confirm_pass_sig);
         cicloSign = findViewById(R.id.spinner_ciclo_sig);
         estadoSign = findViewById(R.id.spinner_estado_sig);
         listaCiclos = new ArrayList();
@@ -114,32 +115,38 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.button_sign:
 
-                mAuth.createUserWithEmailAndPassword(emailSign.getText().toString(), passSign.getText().toString())
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful() && !emailSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("login", "createUserWithEmail:success");
-                                    //Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
-                                    String uid = currentUser.getUid();
-                                    comprobarUsuario(uid);
+                if(passSign.getText().toString().equals(confirmPassSign.getText().toString())) {
 
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                                    builder.setTitle("Dialogo de registro");
-                                    builder.setMessage("Registro creado correctamente");
+                    mAuth.createUserWithEmailAndPassword(emailSign.getText().toString(), passSign.getText().toString())
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful() && !emailSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("login", "createUserWithEmail:success");
+                                        //Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
+                                        String uid = currentUser.getUid();
+                                        comprobarUsuario(uid);
 
-                                    vaciarTexto();
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                        builder.setTitle("Dialogo de registro");
+                                        builder.setMessage("Registro creado correctamente");
 
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("login", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                        vaciarTexto();
+
+                                        finish();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("login", "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(getApplicationContext(), "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    Toast.makeText(getApplicationContext(),"Las contaseñas no coinciden",Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.button_log_sign:
                 finish();
