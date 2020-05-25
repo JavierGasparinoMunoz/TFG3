@@ -33,6 +33,9 @@ public class AlumnoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumno);
+        String recuperado = getIntent().getExtras().getString("uid");
+        Log.v("test",recuperado);
+        Log.v("test","ejecutado algo");
         instancias();
         iniciarPager();
         acciones();
@@ -71,7 +74,7 @@ public class AlumnoActivity extends AppCompatActivity {
         listaFragments.add(new Ev2Fragment());
         listaFragments.add(new Ev3Fragment());
         listaFragments.add(new CalendarioAlumnoFragment());
-        listaFragments.add(FormularioAlumnosFragment.newInstance(getIntent().getStringExtra("user")));
+        listaFragments.add(FormularioAlumnosFragment.newInstance((String) getIntent().getExtras().get("uid")));
         adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
         Ev1Fragment listaFragment = new Ev1Fragment();
         //adaptadorFragments.agregarFragment(listaFragment);
