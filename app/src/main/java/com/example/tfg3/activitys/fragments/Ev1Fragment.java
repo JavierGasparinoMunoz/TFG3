@@ -36,6 +36,7 @@ import java.util.Iterator;
 
 public class Ev1Fragment extends Fragment {
 
+    // Se instancian las variables
     private RecyclerView recyclerView;
     AdaptadorFirebase adaptadorFirebase;
     private ArrayList  listaAsignaturas;

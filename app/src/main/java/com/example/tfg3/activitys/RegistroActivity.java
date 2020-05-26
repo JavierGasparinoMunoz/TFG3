@@ -28,13 +28,18 @@ import java.util.ArrayList;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //Inizalizo las variables necesarias del layout
     private EditText emailSign, passSign, nameSign, surnameSign,confirmPassSign;
     private Button btnSign,btnLog;
     private FirebaseAuth mAuth;
     private Spinner estadoSign, cicloSign;
+
+    // Inicilizo las variables necesarias para rellenar los Spinner
     private ArrayList listaEstados, listaCiclos;
     private ArrayAdapter adaptadorEstados;
     private ArrayAdapter adaptadorCiclos;
+
+    // Inicializo las varaiables necesarias de firebase, esta es para recoger los usuarios
     FirebaseUser currentUser;
     Usuarios usuario;
 
@@ -69,11 +74,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         adaptadorCiclos.getItem(cicloSign.getSelectedItemPosition());
     }
 
+    // Metodo donde se le añade una accion a variables, ya sea al pasar por encima arrastrar escuchar un cambio, etc.
     private void acciones() {
         btnSign.setOnClickListener(this);
         btnLog.setOnClickListener(this);
     }
 
+    // Metodo donde se instancian las variables, (se les da valor)
     private void instancias() {
         mAuth = FirebaseAuth.getInstance();
         emailSign = findViewById(R.id.edit_email_sig);
@@ -95,14 +102,19 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         currentUser = mAuth.getCurrentUser();
     }
 
+    // Metodo que comprueba el usuario
     private void comprobarUsuario(final String uid){
-        usuario = new Usuarios(uid,emailSign.getText().toString(),nameSign.getText().toString(),surnameSign.getText().toString(),estadoSign.getSelectedItem().toString(),cicloSign.getSelectedItem().toString());
-        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios").child(usuario.getUid());
+        usuario = new Usuarios(uid,emailSign.getText().toString(),
+                nameSign.getText().toString(), surnameSign.getText().toString(),
+                estadoSign.getSelectedItem().toString(),cicloSign.getSelectedItem().toString());
+        DatabaseReference referenciaTipo =  FirebaseDatabase.getInstance().getReference().child("usuarios")
+                .child(usuario.getUid());
         referenciaTipo.setValue(usuario);
         //usuario = new Usuarios(uid,)
         //referenciaTipo.child("usuarios").child(usuario.getUid());
     }
 
+    // Metodo para vaciar los editText
     private void vaciarTexto(){
         emailSign.setText("");
         passSign.setText("");
@@ -117,11 +129,13 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
 
                 if(passSign.getText().toString().equals(confirmPassSign.getText().toString())) {
 
-                    mAuth.createUserWithEmailAndPassword(emailSign.getText().toString(), passSign.getText().toString())
+                    mAuth.createUserWithEmailAndPassword(emailSign.getText().toString(), passSign.getText()
+                            .toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful() && !emailSign.getText().toString().isEmpty() && !passSign.getText().toString().isEmpty()) {
+                                    if (task.isSuccessful() && !emailSign.getText().toString().isEmpty()
+                                            && !passSign.getText().toString().isEmpty()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d("login", "createUserWithEmail:success");
                                         //Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);

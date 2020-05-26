@@ -23,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
-import com.example.tfg3.activitys.LoginActivity;
+import com.example.tfg3.activitys.MainActivity;
 import com.example.tfg3.activitys.adaptadores.AdaptadorMensajes;
 import com.example.tfg3.activitys.utils.Mensaje;
 import com.example.tfg3.activitys.utils.MensajeEnviar;
@@ -149,12 +149,6 @@ public class FormularioAlumnosFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 returnLogin();
             }
-        });cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                returnLogin();
-            }
         });
 
         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -208,6 +202,7 @@ public class FormularioAlumnosFragment extends Fragment {
         }
     }*/
 
+    // Con este metodo se recoge el nombre del usuario que habla en el chat
     @Override
     public void onResume() {
         if(currentUser != null){
@@ -233,8 +228,9 @@ public class FormularioAlumnosFragment extends Fragment {
         super.onResume();
     }
 
+    // Cuando se llama a este metodo se regresa a MainActivity
     private void returnLogin(){
-        Intent intent = new Intent(getContext(), LoginActivity.class);
+        Intent intent = new Intent(getContext(), MainActivity.class);
         startActivity(intent);
         getFragmentManager().beginTransaction().remove(this).commit();
     }

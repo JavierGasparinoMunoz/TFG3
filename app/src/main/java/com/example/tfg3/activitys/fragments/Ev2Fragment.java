@@ -33,7 +33,7 @@ import java.util.Iterator;
 
 public class Ev2Fragment extends Fragment {
 
-    private RecyclerView recyclerViewAsignaturas,recyclerViewNotas;
+    private RecyclerView recyclerViewAsignaturas;
     AdaptadorFirebase adaptadorFirebase;
     private ArrayList listaAsignaturas;
     Bachillerato bachillerato;
@@ -59,8 +59,8 @@ public class Ev2Fragment extends Fragment {
         recyclerViewAsignaturas = view.findViewById(R.id.recycler_ciclosev2);
         listaAsignaturas = new ArrayList();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference referencia = database.getReference().child("ciclos");
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference referencia = database.getReference().child("ciclos");
 
         referencia.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,44 +69,46 @@ public class Ev2Fragment extends Fragment {
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot dataSnapshot1 = iterator.next();
-                    if (dataSnapshot1.getKey().equals("ciclo")) {
-                        String tipo = (String) dataSnapshot1.getValue();
-                        switch (tipo) {
-                            case "bachillerato":
-                                Log.v("ejemplo", "bachillerato");
+                    String tipo = dataSnapshot1.getKey();
+                    switch (tipo) {
+                        case "bachillerato":
+                            Log.v("ejemplo", "bachillerato");
 
-                                String asignat1 = "dibujoTecnico";
-                                String asignat2 = "fisica";
-                                String asignat3 = "historia";
-                                String asignat4 = "informatica";
-                                String asignat5 = "ingles";
-                                String asignat6 = "lengua";
-                                String asignat7 = "matematicas";
-                                String asignat8 = "quimica";
-                                String asignat9 = "tecnologiaIndustrial";
+                            String asignat1 = "dibujoTecnico";
+                            String asignat2 = "fisica";
+                            String asignat3 = "historia";
+                            String asignat4 = "informatica";
+                            String asignat5 = "ingles";
+                            String asignat6 = "lengua";
+                            String asignat7 = "matematicas";
+                            String asignat8 = "quimica";
+                            String asignat9 = "tecnologiaIndustrial";
 
-                                bachillerato = new Bachillerato(asignat1, asignat2, asignat3, asignat4, asignat5, asignat6, asignat7, asignat8, asignat9);
+                            bachillerato = new Bachillerato(asignat1, asignat2, asignat3, asignat4, asignat5, asignat6, asignat7, asignat8, asignat9);
 
-                                listaAsignaturas.add(bachillerato);
-                                break;
-                            case "dam":
-                                Log.v("ejemplo", "dam");
+                            listaAsignaturas.add(bachillerato);
 
-                                String asig1 = "bbdd";
-                                String asig2 = "ed";
-                                String asig3 = "fol";
-                                String asig4 = "ingles";
-                                String asig5 = "lgdm";
-                                String asig6 = "program";
-                                String asig7 = "si";
+                            referencia.child("bachillerato");
 
-                                dam = new Dam(asig1, asig2, asig3, asig4, asig5, asig6, asig7);
+                            break;
+                        case "dam":
+                            Log.v("ejemplo", "dam");
 
-                                listaAsignaturas.add(dam);
-                                break;
-                        }
-                    } else {
-                        Toast.makeText(getContext(), "no entra", Toast.LENGTH_SHORT).show();
+                            String asig1 = "bbdd";
+                            String asig2 = "ed";
+                            String asig3 = "fol";
+                            String asig4 = "ingles";
+                            String asig5 = "lgdm";
+                            String asig6 = "program";
+                            String asig7 = "si";
+
+                            dam = new Dam(asig1, asig2, asig3, asig4, asig5, asig6, asig7);
+
+                            listaAsignaturas.add(dam);
+
+                            referencia.child("dam");
+
+                            break;
                     }
                 }
             }

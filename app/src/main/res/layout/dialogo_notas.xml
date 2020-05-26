@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/holo_orange_light">
+
+    <EditText
+        android:hint="Introduce la nota de la asignatura"
+        android:id="@+id/edit_nota_asignatura"
+        android:inputType="number"
+        android:background="@color/fondoblancoo"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp" />
+
+    <Button
+        android:id="@+id/btn_añadir_nota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textAllCaps="false"
+        android:text="Añadir nota"
+        android:textColor="@android:color/black"
+        android:background="@color/fondoblancoo"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

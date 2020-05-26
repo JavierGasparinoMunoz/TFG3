@@ -26,6 +26,7 @@ import java.util.Date;
 
 public class CalendarioAlumnoFragment extends Fragment  {
 
+    // SE instancias las variables
     CalendarView calendarView;
     Button comprobar;
     String  date,texto;
@@ -39,16 +40,22 @@ public class CalendarioAlumnoFragment extends Fragment  {
         super.onCreate(savedInstanceState);
     }
 
+
+    // Metodo donde se crea la vista del fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_calendario_alumno,container,false);
+
+        //Se instancian los valores gracias a la vista creada
         calendarView = view.findViewById(R.id.calendarView);
         comprobar = view.findViewById(R.id.button_date);
         return view;
     }
 
+    // Metodo donde una vez se haya creado la vista se establece que la variable date sera el dia,
+    // el mes y el año seleccionados y se inicia el dialogo donde se pueden crear eventos
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

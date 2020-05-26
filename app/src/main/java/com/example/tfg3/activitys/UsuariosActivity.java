@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorUsuarios;
@@ -24,6 +25,7 @@ import java.util.Iterator;
 
 public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsuarios.OnUsuarioListener {
 
+    // Inicializo las variables necesarias
     RecyclerView recyclerView;
     String currentUser;
     AdaptadorUsuarios adaptadorUsuarios;
@@ -40,6 +42,7 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
 
 
        /* currentUser = (String) getIntent().getExtras().get("uid");
+
         final DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(currentUser);
         referenciaTipo.addValueEventListener(new ValueEventListener() {
             @Override
@@ -51,9 +54,11 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
                         String tipo = (String) dataSnapshot1.getValue();
                         switch (tipo) {
                             case "Alumno":
-                                 adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout, UsuarioHolder.class,referenciaTipo,UsuariosActivity.this);
+                                 adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout, UsuarioHolder.class,referencia,UsuariosActivity.this);
                                 break;
                         }
+                    } else {
+                        Toast.makeText(getApplicationContext(),"no va",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -64,15 +69,24 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
             }
         });*/
 
-        adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout, UsuarioHolder.class,referencia,UsuariosActivity.this);
+       // Le doy un valor al adaptador creado arriba, se le pasa la referencia
 
+        adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout,
+                UsuarioHolder.class,referencia,UsuariosActivity.this);
+
+        // Se le setea el adaptador al recycler con lo que se rellenara con los datos que recoja
         recyclerView.setAdapter(adaptadorUsuarios);
-        recyclerView.setLayoutManager(new GridLayoutManager(UsuariosActivity.this,1, LinearLayoutManager.VERTICAL,false));
+
+        // Se establece de que manera se veran los usuarios del recycler
+        recyclerView.setLayoutManager(new GridLayoutManager(UsuariosActivity.this,1,
+                LinearLayoutManager.VERTICAL,false));
 
     }
 
+    // Se añaden los metodos de las interfaces necesarias
     @Override
     public void onUsuarioSelected(Usuarios usuario) {
+        // Se inicia la actividad de alumno (AlumnoActivity) pasandole el uid que recoges mediante de la clase MainActivity
         Intent intent = new Intent(getApplicationContext(), AlumnoActivity.class);
         intent.putExtra("uid", (String) getIntent().getExtras().get("uid"));
         startActivity(intent);
