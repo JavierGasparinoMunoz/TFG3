@@ -24,7 +24,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CalendarioAlumnoFragment extends Fragment implements DialogoCalendario.OnDialogoPersoListener {
+public class CalendarioAlumnoFragment extends Fragment  {
 
     CalendarView calendarView;
     Button comprobar;
@@ -60,11 +60,5 @@ public class CalendarioAlumnoFragment extends Fragment implements DialogoCalenda
                 dialogoCalendario.show(getFragmentManager(), "perso");
             }
         });
-    }
-
-    @Override
-    public void onDilagoloSelected(String informacion) {
-        texto = date + informacion;
-        Toast.makeText(getContext(),texto,Toast.LENGTH_SHORT).show();
     }
 }

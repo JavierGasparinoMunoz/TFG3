@@ -9,9 +9,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorFragmentsAlumno;
+import com.example.tfg3.activitys.dialogos.DialogoCalendario;
 import com.example.tfg3.activitys.fragments.CalendarioAlumnoFragment;
 import com.example.tfg3.activitys.fragments.Ev1Fragment;
 import com.example.tfg3.activitys.fragments.Ev2Fragment;
@@ -21,7 +23,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class AlumnoActivity extends AppCompatActivity {
+public class AlumnoActivity extends AppCompatActivity implements DialogoCalendario.OnDialogoPersoListener {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
@@ -83,5 +85,10 @@ public class AlumnoActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public void onDilagoloSelected(String informacion) {
+        Toast.makeText(getApplicationContext(),informacion,Toast.LENGTH_LONG).show();
     }
 }

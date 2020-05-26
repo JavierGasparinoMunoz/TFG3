@@ -63,9 +63,8 @@ public class DialogoCalendario extends DialogFragment {
         botonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 informacion = new Informacion(editText.getText().toString());
-                 String infoString = informacion + " " + editText.getText().toString();
-                listener.onDilagoloSelected(infoString);
+                informacion = new Informacion(editText.getText().toString());
+                listener.onDilagoloSelected(informacion.toString());
                 dismiss();
             }
         });
