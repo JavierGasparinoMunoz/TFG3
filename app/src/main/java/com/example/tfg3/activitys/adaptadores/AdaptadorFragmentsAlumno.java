@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class AdaptadorFragmentsAlumno extends FragmentPagerAdapter {
     private ArrayList<Fragment> listaFragments;
-    private String[] nombres = new String[]{"EV1","EV2","EV3","Calendario","Formulario"};
+    private String[] nombres = new String[]{"EV1","EV2","EV3","Calendario","Chat"};
 
     public AdaptadorFragmentsAlumno(@NonNull FragmentManager fm, int behavior, ArrayList<Fragment> listaFragments) {
         super(fm, behavior);

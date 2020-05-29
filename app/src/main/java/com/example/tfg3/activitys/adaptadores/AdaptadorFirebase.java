@@ -36,12 +36,12 @@ public class AdaptadorFirebase extends FirebaseRecyclerAdapter<Ciclos, CicloHold
             @Override
             public void onClick(View v) {
                 nota = Integer.parseInt(viewHolder.getNotas().getText().toString());
-               listener.onAdaptadorSelected(nota);
+               listener.onAdaptadorSelected();
             }
         });
     }
 
     public interface OnAdaptadorListener{
-        void onAdaptadorSelected(int nota);
+        void onAdaptadorSelected();
     }
 }

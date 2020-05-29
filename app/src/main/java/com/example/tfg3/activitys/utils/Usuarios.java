@@ -14,8 +14,13 @@ public class Usuarios {
         this.ciclo = ciclo;
     }*/
 
+    public Usuarios(String nombre, String apellido, String ciclo) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.ciclo = ciclo;
+    }
 
-    public Usuarios(String uid,String email, String nombre, String apellido, String perfil, String ciclo) {
+    public Usuarios(String uid, String email, String nombre, String apellido, String perfil, String ciclo) {
         this.uid = uid;
         this.email = email;
         this.nombre = nombre;

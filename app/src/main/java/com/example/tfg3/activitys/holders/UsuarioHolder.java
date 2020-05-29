@@ -40,7 +40,7 @@ public class UsuarioHolder extends RecyclerView.ViewHolder {
     public UsuarioHolder(@NonNull View itemView) {
         super(itemView);
         nombre = itemView.findViewById(R.id.texto_nombre);
-        apellido = itemView.findViewById(R.id.texto_apellido);
+        //apellido = itemView.findViewById(R.id.texto_apellido);
         ciclo = itemView.findViewById(R.id.texto_ciclo);
 
 

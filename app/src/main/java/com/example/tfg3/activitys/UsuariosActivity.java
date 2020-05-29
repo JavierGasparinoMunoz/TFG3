@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsuarios.OnUsuarioListener {
@@ -29,6 +31,7 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
     RecyclerView recyclerView;
     String currentUser;
     AdaptadorUsuarios adaptadorUsuarios;
+    ArrayList listaUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +41,13 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
         recyclerView = findViewById(R.id.recycler_usuarios);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference referencia = database.getReference("usuarios");
+       // final DatabaseReference referencia = database.getReference("usuarios");
 
 
-       /* currentUser = (String) getIntent().getExtras().get("uid");
+        final Usuarios usuarios = (Usuarios) getIntent().getExtras().get("user");
 
-        final DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(currentUser);
-        referenciaTipo.addValueEventListener(new ValueEventListener() {
+        final DatabaseReference referencia = database.getReference().child("usuarios");
+        referencia.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
@@ -54,7 +57,15 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
                         String tipo = (String) dataSnapshot1.getValue();
                         switch (tipo) {
                             case "Alumno":
-                                 adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout, UsuarioHolder.class,referencia,UsuariosActivity.this);
+
+                                String nombre = usuarios.getNombre();
+                                String ciclo = usuarios.getCiclo();
+                                String apellido = usuarios.getApellido();
+
+                                Usuarios usuariosNew = new Usuarios(nombre,apellido,ciclo);
+
+                                listaUsuarios.add(usuariosNew);
+
                                 break;
                         }
                     } else {
@@ -67,19 +78,17 @@ public class UsuariosActivity extends AppCompatActivity implements AdaptadorUsua
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
        // Le doy un valor al adaptador creado arriba, se le pasa la referencia
 
-        adaptadorUsuarios = new AdaptadorUsuarios(Usuarios.class,R.layout.item_usuario_layout,
-                UsuarioHolder.class,referencia,UsuariosActivity.this);
+        adaptadorUsuarios = new AdaptadorUsuarios(getApplicationContext(),listaUsuarios);
 
         // Se le setea el adaptador al recycler con lo que se rellenara con los datos que recoja
         recyclerView.setAdapter(adaptadorUsuarios);
 
         // Se establece de que manera se veran los usuarios del recycler
-        recyclerView.setLayoutManager(new GridLayoutManager(UsuariosActivity.this,1,
-                LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(UsuariosActivity.this));
 
     }
 

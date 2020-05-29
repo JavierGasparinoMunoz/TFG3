@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
+import com.example.tfg3.activitys.adaptadores.AdaptadorAsignaturas;
+import com.example.tfg3.activitys.adaptadores.AdaptadorAsignaturasDam;
 import com.example.tfg3.activitys.adaptadores.AdaptadorFirebase;
 import com.example.tfg3.activitys.utils.Bachillerato;
 import com.example.tfg3.activitys.holders.CicloHolder;
@@ -39,6 +41,7 @@ public class Ev1Fragment extends Fragment {
     // Se instancian las variables
     private RecyclerView recyclerView;
     AdaptadorFirebase adaptadorFirebase;
+    AdaptadorAsignaturasDam adaptadorAsignaturasDam;
     private ArrayList  listaAsignaturas;
     Bachillerato bachillerato;
     Dam dam;
@@ -69,51 +72,28 @@ public class Ev1Fragment extends Fragment {
         referencia.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot dataSnapshot1 = iterator.next();
                     String tipo = dataSnapshot1.getKey();
-                        switch (tipo) {
-                            case "bachillerato":
-                                Log.v("ejemplo", "bachillerato");
 
-                                String asignat1 = "dibujoTecnico";
-                                String asignat2 = "fisica";
-                                String asignat3 = "historia";
-                                String asignat4 = "informatica";
-                                String asignat5 = "ingles";
-                                String asignat6 = "lengua";
-                                String asignat7 = "matematicas";
-                                String asignat8 = "quimica";
-                                String asignat9 = "tecnologiaIndustrial";
+                    if(tipo == "bachillerato"){
+                        Log.v("ejemplo", "bachillerato");
 
-                                bachillerato = new Bachillerato(asignat1, asignat2, asignat3, asignat4, asignat5, asignat6, asignat7, asignat8, asignat9);
+                        bachillerato = new Bachillerato("dibujoTecnico", "fisica", "historia", "informatica", "ingles", "lengua", "matematicas", "quimica", "tecnologiaIndustrial");
+                        Log.v("ejemplo", bachillerato.getAsignat1());
 
-                                listaAsignaturas.add(bachillerato);
+                        listaAsignaturas.add(bachillerato);
 
-                                referencia.child("bachillerato");
+                    } else if (tipo == "dam"){
+                        Log.v("ejemplo", "dam");
 
-                                break;
-                            case "dam":
-                                Log.v("ejemplo", "dam");
+                        dam = new Dam();
+                        Log.v("ejemplo", dam.getAsig1());
 
-                                String asig1 = "bbdd";
-                                String asig2 = "ed";
-                                String asig3 = "fol";
-                                String asig4 = "ingles";
-                                String asig5 = "lgdm";
-                                String asig6 = "program";
-                                String asig7 = "si";
 
-                                dam = new Dam(asig1, asig2, asig3, asig4, asig5, asig6, asig7);
-
-                                listaAsignaturas.add(dam);
-
-                                referencia.child("dam");
-
-                                break;
-                        }
+                        listaAsignaturas.add(dam);
+                    }
                 }
             }
 
@@ -123,8 +103,7 @@ public class Ev1Fragment extends Fragment {
             }
         });
 
-        adaptadorFirebase = new AdaptadorFirebase(Ciclos.class, R.layout.item_ciclo_layout
-                , CicloHolder.class, referencia, getContext());
+        adaptadorAsignaturasDam = new AdaptadorAsignaturasDam(getContext(), listaAsignaturas);
 
         //listaNotas = new ArrayList();
 
@@ -134,7 +113,7 @@ public class Ev1Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerView.setAdapter(adaptadorFirebase);
+        recyclerView.setAdapter(adaptadorAsignaturasDam);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1,
                 RecyclerView.VERTICAL, false));
         //linearLayoutManager = new LinearLayoutManager(getContext());

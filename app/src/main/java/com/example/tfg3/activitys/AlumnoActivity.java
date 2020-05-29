@@ -26,7 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 public class AlumnoActivity extends AppCompatActivity implements DialogoCalendario.OnDialogoPersoListener,
-        AdaptadorFirebase.OnAdaptadorListener {
+        AdaptadorFirebase.OnAdaptadorListener , DialogoNotas.OnDialogoNotaListener {
 
     //Iniacializo las variables del layout
     private ViewPager viewPager;
@@ -98,8 +98,13 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
 
     // Se implementan los metodos necesarios de las interfaces implementadas
     @Override
-    public void onAdaptadorSelected(int nota) {
+    public void onAdaptadorSelected() {
         DialogoNotas dialogoNotas = new DialogoNotas();
         dialogoNotas.show(getSupportFragmentManager(),"perso");
+    }
+
+    @Override
+    public void onNotaSelected(int nota) {
+
     }
 }

@@ -102,7 +102,7 @@ public class Ev3Fragment extends Fragment {
                             String asig6 = "program";
                             String asig7 = "si";
 
-                            dam = new Dam(asig1, asig2, asig3, asig4, asig5, asig6, asig7);
+                            dam = new Dam();
 
                             listaAsignaturas.add(dam);
 
