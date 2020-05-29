@@ -77,7 +77,7 @@ public class Ev1Fragment extends Fragment {
                     DataSnapshot dataSnapshot1 = iterator.next();
                     String tipo = dataSnapshot1.getKey();
 
-                    if(tipo == "bachillerato"){
+                    if(tipo.equals("bachillerato") ){
                         Log.v("ejemplo", "bachillerato");
 
                         bachillerato = new Bachillerato("dibujoTecnico", "fisica", "historia", "informatica", "ingles", "lengua", "matematicas", "quimica", "tecnologiaIndustrial");
@@ -85,7 +85,7 @@ public class Ev1Fragment extends Fragment {
 
                         listaAsignaturas.add(bachillerato);
 
-                    } else if (tipo == "dam"){
+                    } else if (tipo.equals("dam")){
                         Log.v("ejemplo", "dam");
 
                         dam = new Dam();
