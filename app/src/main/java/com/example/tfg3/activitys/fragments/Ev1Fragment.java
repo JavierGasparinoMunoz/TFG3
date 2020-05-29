@@ -42,7 +42,7 @@ public class Ev1Fragment extends Fragment {
     private RecyclerView recyclerView;
     AdaptadorFirebase adaptadorFirebase;
     AdaptadorAsignaturasDam adaptadorAsignaturasDam;
-    private ArrayList  listaAsignaturas;
+    private ArrayList  listaAsignaturas,listaAsignaturasBachillerato;
     Bachillerato bachillerato;
     Dam dam;
 
@@ -65,6 +65,7 @@ public class Ev1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ev1, container, false);
         recyclerView = view.findViewById(R.id.recycler_ciclos);
         listaAsignaturas = new ArrayList();
+        listaAsignaturasBachillerato = new ArrayList();
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference referencia = database.getReference().child("ciclos");
@@ -83,7 +84,7 @@ public class Ev1Fragment extends Fragment {
                         bachillerato = new Bachillerato("dibujoTecnico", "fisica", "historia", "informatica", "ingles", "lengua", "matematicas", "quimica", "tecnologiaIndustrial");
                         Log.v("ejemplo", bachillerato.getAsignat1());
 
-                        listaAsignaturas.add(bachillerato);
+                        listaAsignaturasBachillerato.add(bachillerato);
 
                     } else if (tipo.equals("dam")){
                         Log.v("ejemplo", "dam");

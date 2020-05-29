@@ -8,11 +8,11 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class AdaptadorFragmentsAlumno extends FragmentPagerAdapter {
+public class AdaptadorFragmentsEvs extends FragmentPagerAdapter {
     private ArrayList<Fragment> listaFragments;
-    private String[] nombres = new String[]{"EV1","EV2","EV3","Dias","Chat"};
+    private String[] nombres = new String[]{"EV1","EV2","EV3"};
 
-    public AdaptadorFragmentsAlumno(@NonNull FragmentManager fm, int behavior, ArrayList<Fragment> listaFragments) {
+    public AdaptadorFragmentsEvs(@NonNull FragmentManager fm, int behavior, ArrayList<Fragment> listaFragments) {
         super(fm, behavior);
         this.listaFragments = listaFragments;
     }
@@ -44,4 +44,3 @@ public class AdaptadorFragmentsAlumno extends FragmentPagerAdapter {
 
 
 }
-

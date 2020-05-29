@@ -1,9 +1,7 @@
 package com.example.tfg3.activitys;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.drawable.Drawable;
@@ -35,7 +33,6 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
     //Inicializo un adaptador donde adpato los fragments que contendra la lista que se inicializa abajo
     private AdaptadorFragmentsAlumno adaptadorFragments;
     private ArrayList<Fragment> listaFragments;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
+import com.example.tfg3.activitys.fragments.EvaluacionesFragment;
 import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -92,13 +93,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String tipo = (String) dataSnapshot1.getValue();
                         switch (tipo) {
                             case "Alumno":
-                                Intent intentAl = new Intent(getApplicationContext(), AlumnoActivity.class);
+                                Intent intentAl = new Intent(getApplicationContext(), MenuActivity.class);
                                 intentAl.putExtra("user", nombreLog.getText().toString());
                                 intentAl.putExtra("uid", finalUid);
                                 startActivity(intentAl);
                                 break;
                             case "Padre":
-                                Intent intentPad = new Intent(getApplicationContext(), AlumnoActivity.class);
+                                Intent intentPad = new Intent(getApplicationContext(), MenuActivity.class);
                                 intentPad.putExtra("user", nombreLog.getText().toString());
                                 intentPad.putExtra("uid", finalUid);
                                 startActivity(intentPad);

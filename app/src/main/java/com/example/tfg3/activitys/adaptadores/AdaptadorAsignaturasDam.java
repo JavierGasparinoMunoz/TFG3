@@ -42,8 +42,6 @@ public class AdaptadorAsignaturasDam extends RecyclerView.Adapter<AdaptadorAsign
     public void onBindViewHolder(@NonNull MiHolder holder, int position) {
         final Dam dam = listaDam.get(position);
         holder.getAsignaturas().setText(dam.toString());
-
-
     }
 
     @Override
