@@ -1,7 +1,6 @@
 package com.example.tfg3.activitys.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,25 +9,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorFirebase;
 import com.example.tfg3.activitys.holders.CicloHolder;
-import com.example.tfg3.activitys.utils.Bachillerato;
 import com.example.tfg3.activitys.utils.Ciclos;
-import com.example.tfg3.activitys.utils.Dam;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Ev2Fragment extends Fragment {

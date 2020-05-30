@@ -54,7 +54,7 @@ public class DialogoNotas extends DialogFragment {
             Log.v("cast","No se puede castear");
         }*/
 
-        currentUser =  this.getArguments().getString("user");
+       // currentUser =  this.getArguments().getString("user");
 
 
         vista = LayoutInflater.from(context).inflate(R.layout.dialogo_notas,null);
@@ -77,18 +77,18 @@ public class DialogoNotas extends DialogFragment {
             public void onClick(View view) {
                 //nota = Integer.parseInt(editNota.getText().toString());
                 //listener.onNotaSelected(nota);
-                actDatos();
+               // actDatos();
                 dismiss();
             }
         });
     }
 
-    private void actDatos() {
+    /*private void actDatos() {
         final DatabaseReference actualizar = databaseReference.getDatabase().getReference().child("ciclos").child(currentUser);
 
 
         actualizar.child("nota").setValue(editNota.getText().toString());
-    }
+    }*/
 
     private void instancias() {
         editNota =  vista.findViewById(R.id.edit_nota_asignatura);

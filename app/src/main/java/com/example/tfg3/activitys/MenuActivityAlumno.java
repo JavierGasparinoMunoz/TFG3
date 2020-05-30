@@ -45,6 +45,7 @@ import java.util.Iterator;
 
 public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFirebase.OnAdaptadorListener, DialogoCalendario.OnDialogoPersoListener, NavigationView.OnNavigationItemSelectedListener {
 
+    // Inicializo las variables que vaya a necesitar
     String currentUser, currentEmail;
     TextView nombreEdit, emailEdit;
     Toolbar toolbar;
@@ -55,6 +56,7 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_alumno);
 
+        // Instancio las variables
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("");
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -69,12 +71,13 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Instancio las variables contenidas en la clase "nav_header_evaluaciones" llamando al
+        // metodo getHeaderView desde el navigation creado
         View headView = navigationView.getHeaderView(0);
         nombreEdit = headView.findViewById(R.id.id_nombre_apellido_perfil);
         emailEdit = headView.findViewById(R.id.email_Perfil);
 
-        //currentUser = (String) getIntent().getExtras().get("user");
-
+        // Llamo al metodo para cambiar el nombre del usuario y el email que estan en el navigation drawler
         cambiarNombre();
 
     }
@@ -89,6 +92,7 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         }
     }
 
+    // Metodo para cambiar el nombre y el email de la cabecera por los del usuario.
     private void cambiarNombre() {
         final String uid = getIntent().getExtras().getString("uid");
         DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
@@ -130,6 +134,7 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         Toast.makeText(getApplicationContext(), informacion, Toast.LENGTH_LONG).show();
     }
 
+    //Menu de arriba
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -148,6 +153,7 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         return super.onOptionsItemSelected(item);
     }
 
+    //Menu lateral
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -168,6 +174,7 @@ public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFi
         return false;
     }
 
+    //Metodo para cargar el fragment
     private void cargarFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contenedor_fragments, fragment).commit();

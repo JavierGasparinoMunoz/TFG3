@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:textAllCaps="false"
-        android:text="Crear comunicado"
+        android:text="Emitir comunicado"
         android:textColor="@android:color/black"
         android:background="@drawable/edittext_modified"
         android:layout_gravity="center"/>
