@@ -1,5 +1,6 @@
 package com.example.tfg3.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.tfg3.R;
@@ -12,42 +13,51 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.tfg3.activitys.fragments.CalendarioAlumnoFragment;
 import com.example.tfg3.activitys.fragments.EvaluacionesFragment;
 import com.example.tfg3.activitys.fragments.FormularioAlumnosFragment;
+import com.example.tfg3.activitys.holders.CicloHolder;
+import com.example.tfg3.activitys.utils.Ciclos;
+import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase.OnAdaptadorListener, DialogoNotas.OnDialogoNotaListener, DialogoCalendario.OnDialogoPersoListener, NavigationView.OnNavigationItemSelectedListener {
+import java.util.Iterator;
 
-    private AppBarConfiguration mAppBarConfiguration;
-    String currentUser;
-    TextView nombre;
+public class MenuActivityAlumno extends AppCompatActivity implements AdaptadorFirebase.OnAdaptadorListener, DialogoCalendario.OnDialogoPersoListener, NavigationView.OnNavigationItemSelectedListener {
+
+    String currentUser, currentEmail;
+    TextView nombreEdit, emailEdit;
     Toolbar toolbar;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_menu_alumno);
 
         toolbar = findViewById(R.id.toolbar);
-        nombre = findViewById(R.id.id_nombre_apellido_perfil);
-        toolbar.setTitle("Evaluaciones");
+        toolbar.setTitle("");
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         setSupportActionBar(toolbar);
 
 
@@ -59,19 +69,14 @@ public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        currentUser = (String) getIntent().getExtras().get("user");
-        //nombre.setText(currentUser);
+        View headView = navigationView.getHeaderView(0);
+        nombreEdit = headView.findViewById(R.id.id_nombre_apellido_perfil);
+        emailEdit = headView.findViewById(R.id.email_Perfil);
 
+        //currentUser = (String) getIntent().getExtras().get("user");
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_evs, R.id.nav_calendar, R.id.nav_chat)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
+        cambiarNombre();
+
     }
 
     @Override
@@ -84,27 +89,45 @@ public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase
         }
     }
 
+    private void cambiarNombre() {
+        final String uid = getIntent().getExtras().getString("uid");
+        DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
+        referenciaTipo.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Usuarios usuarios = dataSnapshot.getValue(Usuarios.class);
+                currentUser = usuarios.getNombre();
+                currentEmail = usuarios.getEmail();
+
+                nombreEdit.setText(currentUser);
+                emailEdit.setText(currentEmail);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_evaluaciones2_drawer, menu);
+        getMenuInflater().inflate(R.menu.menu_alumno, menu);
         return true;
 
     }
 
     @Override
     public void onAdaptadorSelected() {
-        DialogoNotas dialogoNotas = new DialogoNotas();
-        dialogoNotas.show(getSupportFragmentManager(),"perso");
+        DialogoNotas dialogoNotas = DialogoNotas.newInstance((String) getIntent().getExtras().get("uid"));
+        dialogoNotas.show(getSupportFragmentManager(), "perso");
+
     }
 
     @Override
     public void onDilagoloSelected(String informacion) {
-        Toast.makeText(getApplicationContext(),informacion,Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onNotaSelected(int nota) {
-
+        Toast.makeText(getApplicationContext(), informacion, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -112,11 +135,15 @@ public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase
         int id = item.getItemId();
 
         if (id == R.id.nav_evaluaciones) {
-            cargarFragment(new EvaluacionesFragment());;
-        } else if (id == R.id.nav_calendar){
+            cargarFragment(EvaluacionesFragment.newInstance((String) getIntent().getExtras().get("uid")));
+            ;
+        } else if (id == R.id.nav_calendar) {
             cargarFragment(new CalendarioAlumnoFragment());
-        } else if (id == R.id.nav_chat){
+        } else if (id == R.id.nav_chat) {
             cargarFragment(FormularioAlumnosFragment.newInstance((String) getIntent().getExtras().get("uid")));
+        } else if (id == R.id.nav_cerrarSesion) {
+            FirebaseAuth.getInstance().signOut();
+            returnLogin();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -126,11 +153,14 @@ public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase
         int id = item.getItemId();
 
         if (id == R.id.nav_evaluaciones) {
-            cargarFragment(new EvaluacionesFragment());
+            cargarFragment(EvaluacionesFragment.newInstance((String) getIntent().getExtras().get("uid")));
         } else if (id == R.id.nav_calendar) {
             cargarFragment(new CalendarioAlumnoFragment());
         } else if (id == R.id.nav_chat) {
             cargarFragment(FormularioAlumnosFragment.newInstance((String) getIntent().getExtras().get("uid")));
+        } else if (id == R.id.nav_cerrarSesion) {
+            FirebaseAuth.getInstance().signOut();
+            returnLogin();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -141,6 +171,13 @@ public class MenuActivity extends AppCompatActivity implements AdaptadorFirebase
     private void cargarFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contenedor_fragments, fragment).commit();
+    }
+
+    // Cuando se llama a este metodo se regresa a MainActivity
+    private void returnLogin() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

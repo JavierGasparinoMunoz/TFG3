@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.holders.MensajeHolder;
-import com.example.tfg3.activitys.utils.Mensaje;
-import com.example.tfg3.activitys.utils.MensajeRecibir;
+import com.example.tfg3.activitys.utils.Mensajes.MensajeRecibir;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

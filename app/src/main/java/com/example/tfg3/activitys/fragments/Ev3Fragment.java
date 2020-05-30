@@ -33,18 +33,28 @@ import java.util.Iterator;
 
 public class Ev3Fragment extends Fragment {
 
-    private RecyclerView recyclerViewAsignaturas;
-    AdaptadorFirebase adaptadorFirebase;
-    private ArrayList listaAsignaturas;
-    Bachillerato bachillerato;
-    Dam dam;
+    // Se instancian las variables
+    private RecyclerView recyclerView;
+    AdaptadorFirebase adaptadorFirebaseDam,adaptadorFirebaseBachiller;
+    String currentUser;
 
     public Ev3Fragment() {
+    }
+
+    public static Ev3Fragment newInstance(String user) {
+
+        Bundle args = new Bundle();
+        args.putString("user",user);
+
+        Ev3Fragment fragment = new Ev3Fragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        currentUser =  this.getArguments().getString("user");
     }
 
     @Override
@@ -56,59 +66,35 @@ public class Ev3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ev3, container, false);
-        recyclerViewAsignaturas = view.findViewById(R.id.recycler_ciclose_ev3);
-        listaAsignaturas = new ArrayList();
+        recyclerView = view.findViewById(R.id.recycler_ciclose_ev3);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference referencia = database.getReference().child("ciclos");
+        final DatabaseReference referenciaDam = database.getReference("ciclos").child("dam");
+        final DatabaseReference referenciaBachiller = database.getReference("ciclos").child("bachillerato");
 
-        referencia.addValueEventListener(new ValueEventListener() {
+        DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios")
+                .child(currentUser);
+        referenciaTipo.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
                 while (iterator.hasNext()) {
                     DataSnapshot dataSnapshot1 = iterator.next();
-                    String tipo = dataSnapshot1.getKey();
-                    switch (tipo) {
-                        case "bachillerato":
-                            Log.v("ejemplo", "bachillerato");
+                    if (dataSnapshot1.getKey().equals("ciclo")) {
+                        String tipo = (String) dataSnapshot1.getValue();
+                        switch (tipo) {
+                            case "dam":
+                                adaptadorFirebaseDam = new AdaptadorFirebase(Ciclos.class, R.layout.item_ciclo_layout
+                                        ,CicloHolder.class, referenciaDam,getContext());
+                                recyclerView.setAdapter(adaptadorFirebaseDam);
+                                break;
+                            case "bachillerato":
+                                adaptadorFirebaseBachiller = new AdaptadorFirebase(Ciclos.class,R.layout.item_ciclo_layout
+                                        ,CicloHolder.class,referenciaBachiller,getContext());
+                                recyclerView.setAdapter(adaptadorFirebaseBachiller);
 
-                            String asignat1 = "dibujoTecnico";
-                            String asignat2 = "fisica";
-                            String asignat3 = "historia";
-                            String asignat4 = "informatica";
-                            String asignat5 = "ingles";
-                            String asignat6 = "lengua";
-                            String asignat7 = "matematicas";
-                            String asignat8 = "quimica";
-                            String asignat9 = "tecnologiaIndustrial";
-
-                            bachillerato = new Bachillerato(asignat1, asignat2, asignat3, asignat4, asignat5, asignat6, asignat7, asignat8, asignat9);
-
-                            listaAsignaturas.add(bachillerato);
-
-                            referencia.child("bachillerato");
-
-                            break;
-                        case "dam":
-                            Log.v("ejemplo", "dam");
-
-                            String asig1 = "bbdd";
-                            String asig2 = "ed";
-                            String asig3 = "fol";
-                            String asig4 = "ingles";
-                            String asig5 = "lgdm";
-                            String asig6 = "program";
-                            String asig7 = "si";
-
-                            dam = new Dam();
-
-                            listaAsignaturas.add(dam);
-
-                            referencia.child("dam");
-
-                            break;
+                                break;
+                        }
                     }
                 }
             }
@@ -119,9 +105,6 @@ public class Ev3Fragment extends Fragment {
             }
         });
 
-        adaptadorFirebase = new AdaptadorFirebase(Ciclos.class, R.layout.item_ciclo_layout
-                , CicloHolder.class, referencia, getContext());
-
         //listaNotas = new ArrayList();
 
         return view;
@@ -130,8 +113,7 @@ public class Ev3Fragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        recyclerViewAsignaturas.setAdapter(adaptadorFirebase);
-        recyclerViewAsignaturas.setLayoutManager(new GridLayoutManager(getContext(), 1,
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1,
                 RecyclerView.VERTICAL, false));
         //linearLayoutManager = new LinearLayoutManager(getContext());
         //recyclerView.setLayoutManager(linearLayoutManager);

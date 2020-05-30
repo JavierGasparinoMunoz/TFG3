@@ -31,7 +31,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     //Inizalizo las variables necesarias del layout
     private EditText emailSign, passSign, nameSign, surnameSign,confirmPassSign;
     private Button btnSign,btnLog;
-    private FirebaseAuth mAuth;
     private Spinner estadoSign, cicloSign;
 
     // Inicilizo las variables necesarias para rellenar los Spinner
@@ -40,7 +39,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private ArrayAdapter adaptadorCiclos;
 
     // Inicializo las varaiables necesarias de firebase, esta es para recoger los usuarios
-    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
     Usuarios usuario;
 
     @Override
@@ -99,7 +98,6 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onStart() {
         super.onStart();
-        currentUser = mAuth.getCurrentUser();
     }
 
     // Metodo que comprueba el usuario
@@ -139,6 +137,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d("login", "createUserWithEmail:success");
                                         //Toast.makeText(getApplicationContext(), "Registro satisfactorio", Toast.LENGTH_SHORT);
+                                        FirebaseUser currentUser = mAuth.getCurrentUser();;
                                         String uid = currentUser.getUid();
                                         comprobarUsuario(uid);
 

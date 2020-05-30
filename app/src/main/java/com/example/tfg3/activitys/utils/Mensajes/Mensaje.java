@@ -1,4 +1,4 @@
-package com.example.tfg3.activitys.utils;
+package com.example.tfg3.activitys.utils.Mensajes;
 
 public class Mensaje {
     private String nombre;

@@ -32,6 +32,7 @@ public class AdaptadorFirebase extends FirebaseRecyclerAdapter<Ciclos, CicloHold
     @Override
     protected void populateViewHolder(final CicloHolder viewHolder, final Ciclos model, int position) {
         viewHolder.getNombre().setText(model.getNombre());
+       // viewHolder.getNotas().setText(model.getNotas());
         viewHolder.getNotas().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,6 +40,7 @@ public class AdaptadorFirebase extends FirebaseRecyclerAdapter<Ciclos, CicloHold
                listener.onAdaptadorSelected();
             }
         });
+        viewHolder.getNotas().setText(viewHolder.getNotas().getText().toString());
     }
 
     public interface OnAdaptadorListener{

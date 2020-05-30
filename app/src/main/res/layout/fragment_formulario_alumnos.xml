@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="48sp"
             android:layout_height="48sp"
             android:id="@+id/foto_perfil"
@@ -31,12 +31,6 @@
             android:layout_height="wrap_content"
             android:gravity="end|center">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Cerrar Sesion"
-                android:id="@+id/btn_cerrar_sesion"
-                />
 
         </LinearLayout>
 

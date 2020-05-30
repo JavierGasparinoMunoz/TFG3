@@ -1,6 +1,8 @@
-package com.example.tfg3.activitys.utils;
+package com.example.tfg3.activitys.utils.Mensajes;
 
-public class MensajeRecibir extends Mensaje{
+import com.example.tfg3.activitys.utils.Mensajes.Mensaje;
+
+public class MensajeRecibir extends Mensaje {
     private Long hora;
 
     public MensajeRecibir() {

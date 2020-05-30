@@ -14,12 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activitys.MenuActivity"
+            android:name=".activitys.MenuActivityAlumno"
             android:label="@string/title_activity_evaluaciones"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".activitys.EvaluacionesFragment" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activitys.MenuActivityProfesor"
+            android:label="@string/title_activity_evaluaciones"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activitys.MenuActivityPadre"
+            android:label="@string/title_activity_evaluaciones"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activitys.UsuariosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activitys.UsuariosActivityEstatico"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activitys.AdministradorActivity"

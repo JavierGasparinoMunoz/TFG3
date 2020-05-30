@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/holo_orange_dark">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Comunicados"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_modified">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginBottom="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/id_recycler_comunicados"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

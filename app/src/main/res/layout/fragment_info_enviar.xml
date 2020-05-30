@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/holo_purple">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Comunicado"/>
+
+    </LinearLayout>
+
+
+
+    <EditText
+        android:hint="Introduce el titulo del comunicado"
+        android:id="@+id/edit_titulo_comunicado"
+        android:inputType="textLongMessage"
+        android:background="@drawable/edittext_modified"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp" />
+
+    <EditText
+        android:hint="Introduce aqui el comunicado"
+        android:id="@+id/edit_comunicado"
+        android:inputType="textLongMessage"
+        android:background="@drawable/edittext_modified"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp" />
+
+    <EditText
+        android:hint="Introduce la descripcion del comunicado"
+        android:id="@+id/edit_descripcion_comunicado"
+        android:inputType="textLongMessage"
+        android:background="@drawable/edittext_modified"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp" />
+
+    <Button
+        android:id="@+id/btn_añadir_comunicado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textAllCaps="false"
+        android:text="Crear comunicado"
+        android:textColor="@android:color/black"
+        android:background="@drawable/edittext_modified"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

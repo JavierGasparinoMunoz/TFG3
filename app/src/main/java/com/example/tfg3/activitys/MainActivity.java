@@ -7,15 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tfg3.R;
-import com.example.tfg3.activitys.fragments.EvaluacionesFragment;
-import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -73,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
 
     //Metodo para comprobar el perfil del usuario, dependiendo del tipo carga Alumno Activity o UsuariosActivity
@@ -93,19 +87,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         String tipo = (String) dataSnapshot1.getValue();
                         switch (tipo) {
                             case "Alumno":
-                                Intent intentAl = new Intent(getApplicationContext(), MenuActivity.class);
+                                Intent intentAl = new Intent(getApplicationContext(), MenuActivityAlumno.class);
                                 intentAl.putExtra("user", nombreLog.getText().toString());
                                 intentAl.putExtra("uid", finalUid);
                                 startActivity(intentAl);
                                 break;
                             case "Padre":
-                                Intent intentPad = new Intent(getApplicationContext(), MenuActivity.class);
+                                Intent intentPad = new Intent(getApplicationContext(), MenuActivityPadre.class);
                                 intentPad.putExtra("user", nombreLog.getText().toString());
                                 intentPad.putExtra("uid", finalUid);
                                 startActivity(intentPad);
                                 break;
                             case "Profesor":
-                                Intent intentProf = new Intent(getApplicationContext(), UsuariosActivity.class);
+                                //Intent intentProf = new Intent(getApplicationContext(), UsuariosActivity.class);
+                                Intent intentProf = new Intent(getApplicationContext(), UsuariosActivityEstatico.class);
                                 intentProf.putExtra("user", nombreLog.getText().toString());
                                 intentProf.putExtra("uid", finalUid);
                                 startActivity(intentProf);

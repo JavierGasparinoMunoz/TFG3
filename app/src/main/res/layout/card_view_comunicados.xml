@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edittext_modified"
-        >
+        android:layout_margin="20dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="24sp"
                 android:layout_height="24sp"
-                android:id="@+id/foto_perfil_mensaje"
+                android:id="@+id/foto_perfil_comunicado"
                 android:src="@drawable/usuariopng" />
 
         </LinearLayout>
@@ -38,23 +38,24 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/nombre_mensaje"
+                    android:id="@+id/titulo_comunicado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="nombre"
+                    android:text="Titulo"
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:id="@+id/hora_mensaje"
+                    android:id="@+id/hora_comunicado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00:00"/>
+                    android:text="00:00"
+                    android:layout_marginRight="5dp"/>
 
             </LinearLayout>
 
             <TextView
                 android:visibility="gone"
-                android:id="@+id/mensaje"
+                android:id="@+id/comunicado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mensaje" />

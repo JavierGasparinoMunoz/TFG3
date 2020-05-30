@@ -1,8 +1,10 @@
-package com.example.tfg3.activitys.utils;
+package com.example.tfg3.activitys.utils.Mensajes;
+
+import com.example.tfg3.activitys.utils.Mensajes.Mensaje;
 
 import java.util.Map;
 
-public class MensajeEnviar extends Mensaje{
+public class MensajeEnviar extends Mensaje {
     private Map hora;
 
     public MensajeEnviar() {

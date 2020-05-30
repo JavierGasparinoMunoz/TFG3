@@ -42,4 +42,17 @@ public class Dam {
     public String getAsig7() {
         return asig7;
     }
+
+    @Override
+    public String toString() {
+        return "Dam{" +
+                "asig1='" + asig1 + '\'' +
+                ", asig2='" + asig2 + '\'' +
+                ", asig3='" + asig3 + '\'' +
+                ", asig4='" + asig4 + '\'' +
+                ", asig5='" + asig5 + '\'' +
+                ", asig6='" + asig6 + '\'' +
+                ", asig7='" + asig7 + '\'' +
+                '}';
+    }
 }

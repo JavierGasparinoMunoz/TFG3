@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
@@ -26,15 +27,32 @@ public class EvaluacionesFragment extends Fragment {
     //Iniacializo las variables del layout
     private ViewPager viewPager;
     private TabLayout tabLayout;
+    String currentUser;
 
     //Inicializo un adaptador donde adpato los fragments que contendra la lista que se inicializa abajo
     private AdaptadorFragmentsEvs adaptadorFragments;
     private ArrayList<Fragment> listaFragments;
 
     public EvaluacionesFragment() {
+
     }
 
+    public static EvaluacionesFragment newInstance(String user) {
 
+        Bundle args = new Bundle();
+        args.putString("user",user);
+
+        EvaluacionesFragment fragment = new EvaluacionesFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        currentUser =  this.getArguments().getString("user");
+
+    }
 
     // Metodo donde se le añade una accion a variables, ya sea al pasar por encima arrastrar escuchar un cambio, etc.
     private void acciones() {
@@ -65,9 +83,9 @@ public class EvaluacionesFragment extends Fragment {
     // se establece que el adaptador usara esa lista y se hace un set de este adaptador al viewPager
     private void iniciarPager() {
         listaFragments = new ArrayList();
-        listaFragments.add(new Ev1Fragment());
-        listaFragments.add(new Ev2Fragment());
-        listaFragments.add(new Ev3Fragment());
+        listaFragments.add(Ev1Fragment.newInstance(currentUser));
+        listaFragments.add(Ev2Fragment.newInstance(currentUser));
+        listaFragments.add(Ev3Fragment.newInstance(currentUser));
         adaptadorFragments = new AdaptadorFragmentsEvs(getChildFragmentManager(),0,listaFragments);
     }
 

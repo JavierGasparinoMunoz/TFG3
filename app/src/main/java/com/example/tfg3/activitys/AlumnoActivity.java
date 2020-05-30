@@ -24,7 +24,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 public class AlumnoActivity extends AppCompatActivity implements DialogoCalendario.OnDialogoPersoListener,
-        AdaptadorFirebase.OnAdaptadorListener , DialogoNotas.OnDialogoNotaListener {
+        AdaptadorFirebase.OnAdaptadorListener {
 
     //Iniacializo las variables del layout
     private ViewPager viewPager;
@@ -33,6 +33,7 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
     //Inicializo un adaptador donde adpato los fragments que contendra la lista que se inicializa abajo
     private AdaptadorFragmentsAlumno adaptadorFragments;
     private ArrayList<Fragment> listaFragments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
 
             @Override
             public void onPageSelected(int position) {
-                Log.v("scroll",String.valueOf(position));
+                Log.v("scroll", String.valueOf(position));
                 Fragment fragment = adaptadorFragments.getItem(position);
                 Drawable drawable = fragment.getView().findViewById(R.id.principal).getBackground();
                 tabLayout.setBackground(drawable);
@@ -76,7 +77,7 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
         listaFragments.add(new Ev3Fragment());
         listaFragments.add(new CalendarioAlumnoFragment());
         listaFragments.add(FormularioAlumnosFragment.newInstance((String) getIntent().getExtras().get("uid")));
-        adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(),0,listaFragments);
+        adaptadorFragments = new AdaptadorFragmentsAlumno(getSupportFragmentManager(), 0, listaFragments);
         viewPager.setAdapter(adaptadorFragments);
     }
 
@@ -90,18 +91,15 @@ public class AlumnoActivity extends AppCompatActivity implements DialogoCalendar
     // Se implementan las interfaces necesarias
     @Override
     public void onDilagoloSelected(String informacion) {
-        Toast.makeText(getApplicationContext(),informacion,Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), informacion, Toast.LENGTH_LONG).show();
     }
 
     // Se implementan los metodos necesarios de las interfaces implementadas
     @Override
     public void onAdaptadorSelected() {
         DialogoNotas dialogoNotas = new DialogoNotas();
-        dialogoNotas.show(getSupportFragmentManager(),"perso");
-    }
-
-    @Override
-    public void onNotaSelected(int nota) {
-
+        dialogoNotas.show(getSupportFragmentManager(), "perso");
     }
 }
+
+

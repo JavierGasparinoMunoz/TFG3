@@ -2,7 +2,6 @@ package com.example.tfg3.activitys.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,22 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.MainActivity;
 import com.example.tfg3.activitys.adaptadores.AdaptadorMensajes;
-import com.example.tfg3.activitys.utils.Mensaje;
-import com.example.tfg3.activitys.utils.MensajeEnviar;
-import com.example.tfg3.activitys.utils.MensajeRecibir;
+import com.example.tfg3.activitys.utils.Mensajes.MensajeEnviar;
+import com.example.tfg3.activitys.utils.Mensajes.MensajeRecibir;
 import com.example.tfg3.activitys.utils.Usuarios;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,16 +34,11 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
-import java.util.concurrent.Executor;
-
-import static android.app.Activity.RESULT_OK;
 
 public class FormularioAlumnosFragment extends Fragment {
 
     private TextView textNombre;
-    private Button btnEnviar,cerrarSesion;
+    private Button btnEnviar;
     private EditText editMensaje;
     private RecyclerView recyclerMensaje;
     private AdaptadorMensajes adaptadorMensajes;
@@ -98,7 +85,6 @@ public class FormularioAlumnosFragment extends Fragment {
         btnEnviar = view.findViewById(R.id.btn_enviar);
         editMensaje = view.findViewById(R.id.txt_mensajes);
         recyclerMensaje = view.findViewById(R.id.rv_mensajes);
-        cerrarSesion = view.findViewById(R.id.btn_cerrar_sesion);
         //btnEnviarFoto = view.findViewById(R.id.enviar_foto);
 
         database = FirebaseDatabase.getInstance();
@@ -140,14 +126,6 @@ public class FormularioAlumnosFragment extends Fragment {
             public void onItemRangeInserted(int positionStart, int itemCount) {
                 super.onItemRangeInserted(positionStart, itemCount);
                 setScrollBar();
-            }
-        });
-
-        cerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                returnLogin();
             }
         });
 
