@@ -46,9 +46,6 @@ public class FormularioAlumnosFragment extends Fragment {
     private FirebaseDatabase database;
     String currentUser;
     private DatabaseReference databaseReference;
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
-    //private static final int PHOTO_SEND = 1;
 
     private String nombreUsuarioLog;
 
@@ -85,11 +82,9 @@ public class FormularioAlumnosFragment extends Fragment {
         btnEnviar = view.findViewById(R.id.btn_enviar);
         editMensaje = view.findViewById(R.id.txt_mensajes);
         recyclerMensaje = view.findViewById(R.id.rv_mensajes);
-        //btnEnviarFoto = view.findViewById(R.id.enviar_foto);
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("chat");
-        storage = FirebaseStorage.getInstance();
 
         adaptadorMensajes = new AdaptadorMensajes(getContext());
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -100,6 +95,8 @@ public class FormularioAlumnosFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // Se da un valor al recycler seteandole un layout y un adaptador
         recyclerMensaje.setLayoutManager(linearLayoutManager);
         recyclerMensaje.setAdapter(adaptadorMensajes);
 
@@ -110,16 +107,6 @@ public class FormularioAlumnosFragment extends Fragment {
                 editMensaje.setText("");
             }
         });
-
-        /*btnEnviarFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.setType("image/jpeg");
-                i.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-                startActivityForResult(Intent.createChooser(i,"Selecciona una foto"),PHOTO_SEND);
-            }
-        });*/
 
         adaptadorMensajes.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
@@ -161,24 +148,6 @@ public class FormularioAlumnosFragment extends Fragment {
     private void setScrollBar(){
         recyclerMensaje.scrollToPosition(adaptadorMensajes.getItemCount()-1);
     }
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PHOTO_SEND && resultCode == RESULT_OK){
-            Uri u = data.getData();
-            storageReference = storage.getReference("imagenes_chat");
-            final StorageReference fotoReferencia = storageReference.child(u.getLastPathSegment());
-            fotoReferencia.putFile(u).addOnSuccessListener((Executor) this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Uri u = taskSnapshot.getUploadSessionUri();
-                        Mensaje m = new Mensaje("Kevin te ha enviado una foto",u.toString(),textNombre.getText().toString(),"","2","00:00");
-                        databaseReference.push().setValue(m);
-                }
-            });
-        }
-    }*/
 
     // Con este metodo se recoge el nombre del usuario que habla en el chat
     @Override

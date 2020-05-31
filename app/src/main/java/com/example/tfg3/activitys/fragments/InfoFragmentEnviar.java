@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.MainActivity;
@@ -38,6 +39,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class InfoFragmentEnviar extends Fragment {
 
+    // Se inician las variables, esta clase es el fragment correspondiente a enviar comunicados
     private Button btnEnviar;
     private EditText editComunicado, editTitulo, editDescipcion;
     private FirebaseDatabase database;
@@ -59,6 +61,7 @@ public class InfoFragmentEnviar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Se instancian las variables iniciadas arriba
         View view = inflater.inflate(R.layout.fragment_info_enviar, container, false);
         btnEnviar = view.findViewById(R.id.btn_añadir_comunicado);
         editComunicado = view.findViewById(R.id.edit_comunicado);
@@ -76,24 +79,18 @@ public class InfoFragmentEnviar extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Al pulsar en el boton se crea un comunicado con los datos
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseReference.push().setValue(new ComunicadoEnviar(editTitulo.getText().toString(), editComunicado.getText().toString(), editDescipcion.getText().toString(), ServerValue.TIMESTAMP));
+                databaseReference.push().setValue(new ComunicadoEnviar(editTitulo.getText().toString()
+                        , editComunicado.getText().toString(), editDescipcion.getText().toString(), ServerValue.TIMESTAMP));
+                Toast.makeText(getContext(),"Comunicado emitido",Toast.LENGTH_SHORT).show();
                 editComunicado.setText("");
                 editTitulo.setText("");
                 editDescipcion.setText("");
             }
         });
 
-        /*btnEnviarFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-                i.setType("image/jpeg");
-                i.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-                startActivityForResult(Intent.createChooser(i,"Selecciona una foto"),PHOTO_SEND);
-            }
-        });*/
     }
 }

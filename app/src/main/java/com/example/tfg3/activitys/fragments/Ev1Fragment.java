@@ -100,8 +100,6 @@ public class Ev1Fragment extends Fragment {
             }
         });
 
-        //listaNotas = new ArrayList();
-
         return view;
     }
 
@@ -110,9 +108,5 @@ public class Ev1Fragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1,
                 RecyclerView.VERTICAL, false));
-        //linearLayoutManager = new LinearLayoutManager(getContext());
-        //recyclerView.setLayoutManager(linearLayoutManager);
-        //recyclerView.setHasFixedSize(true);
-        //fetch();
     }
 }

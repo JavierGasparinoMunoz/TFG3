@@ -129,7 +129,7 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
         int id = item.getItemId();
 
         if (id == R.id.nav_evaluaciones) {
-            cargarFragment(new EvaluacionesFragment());
+            cargarFragment(EvaluacionesFragment.newInstance((String) getIntent().getExtras().get("uid")));
         } else if (id == R.id.nav_comunicados){
             cargarFragment(new InfoFragmentRecibir());
         } else if (id == R.id.nav_calendar){

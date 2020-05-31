@@ -107,7 +107,7 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         int id = item.getItemId();
 
         if (id == R.id.nav_evaluaciones) {
-            cargarFragment(new EvaluacionesFragment());
+            cargarFragment(EvaluacionesFragment.newInstance((String) getIntent().getExtras().get("uid")));
         } else if (id == R.id.nav_info){
             cargarFragment(new InfoFragmentEnviar());
         } else if (id == R.id.nav_calendar){

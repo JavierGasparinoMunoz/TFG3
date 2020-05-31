@@ -37,6 +37,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class InfoFragmentRecibir extends Fragment {
+
+    // Se inician las variables, esta clase es un fragment destinado a recibir los comunicados creados
+    // en la clase "InfoFragmentEnviar" y mostrarlos en una lista
     private RecyclerView recyclerComunicado;
     private AdaptadorComunicados adaptadorComunicado;
     private LinearLayoutManager linearLayoutManager;
@@ -61,6 +64,8 @@ public class InfoFragmentRecibir extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Se instancian las variables iniciadas arriba
         View view = inflater.inflate(R.layout.fragment_info_recibir,container,false);
         recyclerComunicado = view.findViewById(R.id.id_recycler_comunicados);
 
@@ -76,6 +81,8 @@ public class InfoFragmentRecibir extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // Se setean un adaptador y un layout al recycler
         recyclerComunicado.setAdapter(adaptadorComunicado);
         recyclerComunicado.setLayoutManager(linearLayoutManager);
 
