@@ -24,7 +24,7 @@
             android:layout_width="250dp"
             android:layout_height="100dp"
             android:layout_marginBottom="50dp"
-            android:src="@drawable/google0" />
+            android:src="@drawable/logotipo_ces_correo" />
 
         <EditText
             android:layout_width="match_parent"
