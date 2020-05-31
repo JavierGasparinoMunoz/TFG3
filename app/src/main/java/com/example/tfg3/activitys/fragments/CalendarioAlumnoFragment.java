@@ -28,8 +28,8 @@ public class CalendarioAlumnoFragment extends Fragment  {
 
     // SE instancias las variables
     CalendarView calendarView;
-    Button comprobar;
-    String  date,texto;
+
+    String  date;
 
     public CalendarioAlumnoFragment() {
     }
@@ -50,7 +50,6 @@ public class CalendarioAlumnoFragment extends Fragment  {
 
         //Se instancian los valores gracias a la vista creada
         calendarView = view.findViewById(R.id.calendarView);
-        comprobar = view.findViewById(R.id.button_date);
         return view;
     }
 

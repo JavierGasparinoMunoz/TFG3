@@ -37,6 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MenuActivityProfesor extends AppCompatActivity implements AdaptadorFirebase.OnAdaptadorListener, DialogoCalendario.OnDialogoPersoListener, NavigationView.OnNavigationItemSelectedListener {
 
+    // Inicializo las variables que vaya a necesitar
     String currentUser, currentEmail;
     TextView nombreEdit, emailEdit;
     TextView nombre;
@@ -47,6 +48,7 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_profesor);
 
+        // Instancio las variables
         toolbar = findViewById(R.id.toolbar);
         nombre = findViewById(R.id.id_nombre_apellido_perfil);
         toolbar.setTitle("");
@@ -60,10 +62,14 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         NavigationView navigationView = findViewById(R.id.nav_view_profesor);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        // Instancio las variables contenidas en la clase "nav_header_evaluaciones" llamando al
+        // metodo getHeaderView desde el navigation creado
         View headView = navigationView.getHeaderView(0);
         nombreEdit = headView.findViewById(R.id.id_nombre_apellido_perfil);
         emailEdit = headView.findViewById(R.id.email_Perfil);
 
+        // Llamo al metodo para cambiar el nombre del usuario y el email que estan en el navigation drawler
         cambiarNombre();
     }
 
@@ -95,6 +101,7 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         Toast.makeText(getApplicationContext(),informacion,Toast.LENGTH_LONG).show();
     }
 
+    //Menu de arriba
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -114,6 +121,7 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         return super.onOptionsItemSelected(item);
     }
 
+    //Menu lateral
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -148,6 +156,7 @@ public class MenuActivityProfesor extends AppCompatActivity implements Adaptador
         finish();
     }
 
+    // Metodo para cambiar el nombre y el email de la cabecera por los del usuario.
     private void cambiarNombre() {
         final String uid = getIntent().getExtras().getString("uid");
         DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);

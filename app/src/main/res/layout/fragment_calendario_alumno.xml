@@ -33,13 +33,4 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/bg_btn"
-        android:text="Comprobar fecha"
-        android:textColor="@drawable/txt_btn_bg" />
 </LinearLayout>

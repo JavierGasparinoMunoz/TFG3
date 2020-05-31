@@ -16,7 +16,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.tfg3.R;
 import com.example.tfg3.activitys.adaptadores.AdaptadorFirebase;
@@ -25,7 +24,6 @@ import com.example.tfg3.activitys.dialogos.DialogoNotas;
 import com.example.tfg3.activitys.fragments.CalendarioAlumnoFragment;
 import com.example.tfg3.activitys.fragments.EvaluacionesFragment;
 import com.example.tfg3.activitys.fragments.FormularioAlumnosFragment;
-import com.example.tfg3.activitys.fragments.InfoFragmentEnviar;
 import com.example.tfg3.activitys.fragments.InfoFragmentRecibir;
 import com.example.tfg3.activitys.utils.Usuarios;
 import com.google.android.material.navigation.NavigationView;
@@ -38,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFirebase.OnAdaptadorListener, DialogoCalendario.OnDialogoPersoListener, NavigationView.OnNavigationItemSelectedListener {
 
+    // Inicializo las variables que vaya a necesitar
     String currentUser, currentEmail;
     TextView nombreEdit, emailEdit;
     TextView nombre;
@@ -48,6 +47,7 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_padre);
 
+        // Instancio las variables
         toolbar = findViewById(R.id.toolbar);
         nombre = findViewById(R.id.id_nombre_apellido_perfil);
         toolbar.setTitle("");
@@ -62,24 +62,14 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
         NavigationView navigationView = findViewById(R.id.nav_view_padre);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Instancio las variables contenidas en la clase "nav_header_evaluaciones" llamando al
+        // metodo getHeaderView desde el navigation creado
         View headView = navigationView.getHeaderView(0);
         nombreEdit = headView.findViewById(R.id.id_nombre_apellido_perfil);
         emailEdit = headView.findViewById(R.id.email_Perfil);
 
+        // Llamo al metodo para cambiar el nombre del usuario y el email que estan en el navigation drawler
         cambiarNombre();
-        //currentUser = (String) getIntent().getExtras().get("user");
-        //nombre.setText(currentUser);
-
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_evs, R.id.nav_calendar, R.id.nav_chat)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);*/
     }
 
     @Override
@@ -99,6 +89,7 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
 
     }
 
+    // Metodo para cambiar el nombre y el email de la cabecera por los del usuario.
     private void cambiarNombre() {
         final String uid = getIntent().getExtras().getString("uid");
         DatabaseReference referenciaTipo = FirebaseDatabase.getInstance().getReference().child("usuarios").child(uid);
@@ -132,6 +123,7 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
         Toast.makeText(getApplicationContext(),informacion,Toast.LENGTH_LONG).show();
     }
 
+    //Menu de arriba
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -151,6 +143,7 @@ public class MenuActivityPadre extends AppCompatActivity implements AdaptadorFir
         return super.onOptionsItemSelected(item);
     }
 
+    //Menu lateral
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
